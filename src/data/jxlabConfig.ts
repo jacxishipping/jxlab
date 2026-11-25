@@ -60,8 +60,8 @@ export const jxlabConfig = {
   brand: {
     name: "JXLab",
     tagline: "Agentic AI & Software Engineering Studio",
-    availability: "Building Autonomous Systems & Custom Software",
-    statusRibbon: "AGENTIC AI STUDIO · SHIPPING 2026",
+    availability: "We build AI agents and the software that ships them.",
+    statusRibbon: "AGENTIC AI · DEV STUDIO · OPEN FOR BUILDS",
     email: "hello@jxlab.ai",
     copyright: "© 2026 JXLab. All Rights Reserved.",
     introLabel: "INITIALIZING JXLAB",
@@ -85,15 +85,15 @@ export const jxlabConfig = {
   ] as SectionRailItem[],
 
   hero: {
-    eyebrow: "Agentic AI & Software Engineering Studio",
-    subline: "Building Autonomous Systems & Custom Software",
+    eyebrow: "Agentic AI & Dev Studio",
+    subline: "We build AI agents and the production software around them.",
     headline: "JXLab",
     primaryCta: {
       label: "Start a project",
       href: "/register",
     },
     secondaryCta: {
-      label: "What is JXLab?",
+      label: "See how we build",
       href: "#about",
     },
   },
@@ -106,11 +106,11 @@ export const jxlabConfig = {
         command: "> what is jxlab?",
         responseParts: [
           {
-            text: "An agentic AI and software development startup turning complex workflows into ",
+            text: "Your agentic AI and software engineering studio — we turn messy ops into ",
             highlight: false,
           },
           {
-            text: "autonomous, production-grade products.",
+            text: "autonomous systems your team can ship and own.",
             highlight: true,
           },
         ],
@@ -118,18 +118,18 @@ export const jxlabConfig = {
       {
         command: "> what do we build?",
         responseParts: [
-          { text: "Multi-agent pipelines", highlight: true },
+          { text: "Production AI agents", highlight: true },
           { text: ", ", highlight: false },
-          { text: "full-stack SaaS platforms", highlight: true },
+          { text: "full-stack products", highlight: true },
           { text: ", and ", highlight: false },
-          { text: "custom internal software", highlight: true },
-          { text: " engineered for reliability at scale.", highlight: false },
+          { text: "custom internal tools", highlight: true },
+          { text: " — from architecture to live deployment.", highlight: false },
         ],
       },
     ],
     specs: [
-      { key: "focus", value: "Agentic AI & Full-Stack" },
-      { key: "delivery", value: "Rapid Sprint Cycles" },
+      { key: "focus", value: "Agents + Full-Stack Dev" },
+      { key: "delivery", value: "Sprint Builds · 2–8 Weeks" },
       { key: "ownership", value: "100% Client IP" },
     ],
     closingPrompt: "> ready to ship?",
@@ -152,20 +152,20 @@ export const jxlabConfig = {
   },
 
   solutionsSection: {
-    eyebrow: "AUTONOMOUS ENGINEERING PIPELINE",
-    headline: "Systems Built to Run on Their Own",
+    eyebrow: "WHAT WE SHIP",
+    headline: "Agents and software that earn their keep",
     description:
-      "Every engagement ships as clean, observable production software. Pick a track to inspect our reference architecture, deliverables, and sprint cadence.",
+      "Pick a track. Each one is a sprint-ready path from your workflow pain to a production system your team owns.",
     groups: [
       {
         id: "core" as const,
         title: "Core Capabilities",
-        subtitle: "Line 01 · Foundational AI & Product Engineering",
+        subtitle: "Line 01 · Agentic AI & Product Engineering",
       },
       {
         id: "specialized" as const,
         title: "Specialized Tracks",
-        subtitle: "Line 02 · Domain-Specific & Infrastructure Systems",
+        subtitle: "Line 02 · Industry Ops & Infrastructure",
       },
     ],
     items: [
@@ -175,7 +175,7 @@ export const jxlabConfig = {
         category: "Core Capability",
         title: "Autonomous AI Agents",
         shortDesc:
-          "Stateful multi-agent graphs that plan, invoke tools, verify outputs, and escalate to humans with full audit trails.",
+          "Cut manual ops — agents that plan, call your tools, verify results, and escalate to humans with a full audit trail.",
         architectureSubtitle: "Multi-Agent Orchestration & Tool Execution",
         summary:
           "We design resilient agent loops backed by typed tool schemas, bounded retries, durable state checkpoints, and human-in-the-loop approval gates so autonomous workflows stay predictable in production.",
@@ -194,7 +194,7 @@ export const jxlabConfig = {
         category: "Core Capability",
         title: "Full-Stack Web & SaaS",
         shortDesc:
-          "End-to-end multi-tenant web applications with crisp interfaces, role-based access, billing, and sub-second UX.",
+          "Launch or rebuild your product — multi-tenant apps with auth, billing, and UX that feels fast on day one.",
         architectureSubtitle: "Type-Safe App Router & Multi-Tenant Core",
         summary:
           "From zero-to-one startup MVPs to high-throughput customer portals, we ship maintainable full-stack platforms with clean domain boundaries, automated migrations, and zero-downtime deployments.",
@@ -213,7 +213,7 @@ export const jxlabConfig = {
         category: "Core Capability",
         title: "Workflow & API Automation",
         shortDesc:
-          "Event-driven pipelines connecting ERPs, Slack, email, webhooks, and AI extraction without brittle glue scripts.",
+          "Kill copy-paste work — durable pipelines that sync ERPs, Slack, email, and docs without brittle zaps.",
         architectureSubtitle: "Durable Event Queues & Idempotent Workers",
         summary:
           "Replace manual copy-paste operations and fragile no-code zaps with version-controlled, idempotent workers that retry cleanly, log every payload, and scale seamlessly with volume.",
@@ -232,7 +232,7 @@ export const jxlabConfig = {
         category: "Core Capability",
         title: "Desktop & Internal Tools",
         shortDesc:
-          "High-velocity operator consoles, review workbenches, and cross-platform desktop apps tailored to your team.",
+          "Give operators speed — custom consoles and desktop apps built for how your team actually works.",
         architectureSubtitle: "Keyboard-First Operator Workbenches",
         summary:
           "Off-the-shelf admin panels slow down specialized teams. We craft bespoke internal workbenches and desktop utilities with instant search, bulk actions, and AI co-pilot sidebars.",
@@ -251,7 +251,7 @@ export const jxlabConfig = {
         category: "Core Capability",
         title: "Data Pipelines & RAG",
         shortDesc:
-          "Hybrid vector + structured retrieval engines with verifiable citations, live document syncing, and ACL filtering.",
+          "Answers your team can trust — retrieval with citations, permissions, and live document sync.",
         architectureSubtitle: "Hybrid Retrieval & Citation-Grounded Knowledge",
         summary:
           "We engineer retrieval pipelines that respect document permissions, combine semantic and lexical search with reranking, and ground every model response in clickable primary sources.",
@@ -270,7 +270,7 @@ export const jxlabConfig = {
         category: "Core Capability",
         title: "UI/UX Design Systems",
         shortDesc:
-          "Distinctive brand interfaces, motion choreography, and accessible component libraries built directly in code.",
+          "Ship a product that looks like you — brand UI, motion, and accessible components built in code.",
         architectureSubtitle: "Tokenized Components & Motion Architecture",
         summary:
           "Software should feel tactile and unmistakable. We pair visual direction with production React + Tailwind component primitives, ensuring WCAG accessibility and effortless team velocity.",
@@ -289,7 +289,7 @@ export const jxlabConfig = {
         category: "Specialized Track",
         title: "Logistics & Operations Tech",
         shortDesc:
-          "Autonomous dispatch, freight document reconciliation, shipment exception agents, and live route visibility.",
+          "Fewer exceptions, faster freight — agents that reconcile docs, triage carriers, and flag ETA risk.",
         architectureSubtitle: "Real-Time Dispatch & Document Reconciliation",
         summary:
           "Built for freight brokers, 3PLs, and supply-chain operators drowning in BOLs, carrier emails, and tracking portals. Our agents extract, verify, and resolve exceptions before delays compound.",
@@ -308,7 +308,7 @@ export const jxlabConfig = {
         category: "Specialized Track",
         title: "Custom ERP & Dashboards",
         shortDesc:
-          "Modular inventory, procurement, and financial command centers engineered around how your business actually runs.",
+          "Run the business your way — inventory, procurement, and finance dashboards without legacy lock-in.",
         architectureSubtitle: "Event-Sourced Ledger & Real-Time Analytics",
         summary:
           "When legacy ERPs lock you into rigid workflows, we build sleek modular replacements or intelligent overlay layers with real-time KPIs, approval workflows, and natural-language reporting.",
@@ -327,7 +327,7 @@ export const jxlabConfig = {
         category: "Specialized Track",
         title: "LLM Eval & Guardrails",
         shortDesc:
-          "Automated benchmark suites, hallucination detectors, PII redaction layers, and prompt/model regression gates.",
+          "Ship AI without flying blind — eval suites, PII guards, and regression gates before every model change.",
         architectureSubtitle: "Continuous Evaluation & Runtime Policy Engine",
         summary:
           "Shipping AI without evals is flying blind. We establish golden datasets, LLM-as-a-judge pipelines, deterministic schema checks, and runtime safety filters so upgrades never silently break quality.",
@@ -346,7 +346,7 @@ export const jxlabConfig = {
         category: "Specialized Track",
         title: "Cloud & Edge Deployment",
         shortDesc:
-          "Containerized GPU/CPU inference infrastructure, private VPC hosting, zero-downtime CI/CD, and cost telemetry.",
+          "Deploy with confidence — private VPC, zero-downtime CI/CD, and cost visibility for agent workloads.",
         architectureSubtitle: "Containerized Infrastructure & Private VPC",
         summary:
           "Whether deploying globally at the edge or inside strict customer VPCs, we harden your cloud footprint with reproducible infrastructure-as-code, structured logs, and predictable unit economics.",
@@ -476,7 +476,7 @@ export const jxlabConfig = {
         id: "how-to-start",
         question: "How do we start a project with JXLab?",
         answer:
-          "Click 'Start a project' to open your JXLab Client Portal account or send us your goals. Within 24 hours we schedule a 30-minute technical scoping session and follow up with a concrete architecture brief and sprint plan.",
+          "Click 'Start a project' or 'Scope your project' and tell us the agent, product, or internal tool you need. Within 24 hours we reply with a concrete architecture brief and sprint plan — then lock a 30-minute technical scoping call.",
       },
     ] as FaqItem[],
   },
@@ -550,9 +550,9 @@ export const jxlabConfig = {
   },
 
   undergroundCta: {
-    headline: "Ready to build something?",
-    subline: "Agentic AI · Custom Software · Production Systems",
-    ctaLabel: "Start a project",
+    headline: "Ready to build with JXLab?",
+    subline: "Tell us the agent or product you need — architecture brief in 24 hours.",
+    ctaLabel: "Scope your project",
     ctaHref: "/register",
   },
 

@@ -345,13 +345,17 @@ export function KoiAuthPortal() {
 
   const trackParam = searchParams.get("track");
   const projectParam = searchParams.get("project");
-  const hasScopeContext = Boolean(trackParam || projectParam);
+  const viewParam = searchParams.get("view");
+  const nextPath = searchParams.get("next");
+  const wantsScope =
+    viewParam === "scope" ||
+    nextPath === "/register" ||
+    Boolean(trackParam || projectParam);
   const initialMode =
     searchParams.get("mode") === "signin" ? "signin" : "signup";
-  const nextPath = searchParams.get("next");
 
   const [portalView, setPortalView] = useState<"account" | "scope">(
-    hasScopeContext ? "scope" : "account"
+    wantsScope && initialMode !== "signin" ? "scope" : "account"
   );
   const [mode, setMode] = useState<"signin" | "signup">(initialMode);
 
@@ -400,8 +404,13 @@ export function KoiAuthPortal() {
   const [submittingBrief, setSubmittingBrief] = useState(false);
 
   useEffect(() => {
-    setMode(searchParams.get("mode") === "signin" ? "signin" : "signup");
-    if (searchParams.get("track") || searchParams.get("project")) {
+    const nextMode = searchParams.get("mode") === "signin" ? "signin" : "signup";
+    setMode(nextMode);
+    const openScope =
+      searchParams.get("view") === "scope" ||
+      searchParams.get("next") === "/register" ||
+      Boolean(searchParams.get("track") || searchParams.get("project"));
+    if (openScope && nextMode !== "signin") {
       setPortalView("scope");
     }
   }, [searchParams]);
@@ -561,12 +570,29 @@ export function KoiAuthPortal() {
             JXLab Client Portal
           </p>
 
-          {/* View Switcher: Client Account vs Project Scoping */}
+          {/* Scope-first switcher — primary path is project intake */}
           <div
             role="tablist"
             aria-label="Portal mode"
             className="mt-3 inline-flex rounded-full border border-[#DECBAE] bg-[#F2E5CC] p-1"
           >
+            <button
+              type="button"
+              role="tab"
+              aria-selected={portalView === "scope"}
+              onClick={() => {
+                setPortalView("scope");
+                setErrors({});
+                setStatusMessage(null);
+              }}
+              className={`min-h-[36px] rounded-full px-3.5 text-xs font-semibold transition ${
+                portalView === "scope"
+                  ? "bg-[#E88B2E] text-[#1B120A] shadow-xs"
+                  : "text-[#5C4B3E] hover:text-[#1E1712]"
+              }`}
+            >
+              Scope a Project
+            </button>
             <button
               type="button"
               role="tab"
@@ -584,38 +610,21 @@ export function KoiAuthPortal() {
             >
               Client Account
             </button>
-            <button
-              type="button"
-              role="tab"
-              aria-selected={portalView === "scope"}
-              onClick={() => {
-                setPortalView("scope");
-                setErrors({});
-                setStatusMessage(null);
-              }}
-              className={`min-h-[36px] rounded-full px-3.5 text-xs font-semibold transition ${
-                portalView === "scope"
-                  ? "bg-[#1E1712] text-[#FBF5E8] shadow-xs"
-                  : "text-[#5C4B3E] hover:text-[#1E1712]"
-              }`}
-            >
-              Scope a Project
-            </button>
           </div>
 
           <h1 className="mt-4 font-display text-2xl font-bold tracking-tight text-[#1E1712] sm:text-[26px]">
             {portalView === "scope"
-              ? "Scope your JXLab build"
+              ? "Tell us what to build"
               : mode === "signup"
                 ? "Create your JXLab account"
                 : "Welcome back"}
           </h1>
           <p className="mt-1.5 text-sm text-[#5C4B3E]">
             {portalView === "scope"
-              ? "Pick a track and timeline — we reply with a concrete architecture brief within 24 hours."
+              ? "Agent, SaaS product, or internal tool — get a concrete architecture brief within 24 hours."
               : mode === "signup"
-                ? "Start scoping your autonomous AI or custom software sprint."
-                : "Sign in to access project milestones, traces, and deliverables."}
+                ? "Create an account to track milestones, or skip ahead and scope a project first."
+                : "Sign in for project milestones, agent traces, and deliverables."}
           </p>
         </div>
 
@@ -626,13 +635,13 @@ export function KoiAuthPortal() {
                 htmlFor="scope-track"
                 className="block text-xs font-semibold uppercase tracking-wider text-[#5C4B3E]"
               >
-                Solution Track / Demo
+                What do you need?
               </label>
               <select
                 id="scope-track"
                 value={selectedTrack}
                 onChange={(e) => setSelectedTrack(e.target.value)}
-                className="mt-1.5 block min-h-[46px] w-full rounded-xl border border-[#D8C6A8] bg-white/90 px-3.5 py-2.5 text-sm font-medium text-[#1E1712] focus:border-[#C59560] focus:outline-none focus:ring-2 focus:ring-[#C59560]/35"
+                className="mt-1.5 block min-h-[46px] w-full rounded-xl border border-[#D8C6A8] bg-white/90 px-3.5 py-2.5 text-sm font-medium text-[#1E1712] focus:border-[#E88B2E] focus:outline-none focus:ring-2 focus:ring-[#E88B2E]/35"
               >
                 {trackOptions.map((opt) => (
                   <option key={opt.value} value={opt.value}>
@@ -656,8 +665,8 @@ export function KoiAuthPortal() {
                       onClick={() => setSelectedTimeline(t)}
                       className={`min-h-[40px] rounded-xl border px-2 py-1.5 text-[11px] font-semibold transition ${
                         active
-                          ? "border-[#1E1712] bg-[#1E1712] text-[#FBF5E8]"
-                          : "border-[#D8C6A8] bg-white/80 text-[#5C4B3E] hover:border-[#C59560]"
+                          ? "border-[#E88B2E] bg-[#E88B2E] text-[#1B120A]"
+                          : "border-[#D8C6A8] bg-white/80 text-[#5C4B3E] hover:border-[#E88B2E]"
                       }`}
                     >
                       {t}
@@ -683,7 +692,7 @@ export function KoiAuthPortal() {
                   if (errors.email) setErrors((p) => ({ ...p, email: undefined }));
                 }}
                 placeholder="you@company.com"
-                className="mt-1.5 block min-h-[46px] w-full rounded-xl border border-[#D8C6A8] bg-white/90 px-3.5 py-2.5 text-sm text-[#1E1712] placeholder:text-[#9C8977] focus:border-[#C59560] focus:outline-none focus:ring-2 focus:ring-[#C59560]/35"
+                className="mt-1.5 block min-h-[46px] w-full rounded-xl border border-[#D8C6A8] bg-white/90 px-3.5 py-2.5 text-sm text-[#1E1712] placeholder:text-[#9C8977] focus:border-[#E88B2E] focus:outline-none focus:ring-2 focus:ring-[#E88B2E]/35"
               />
               {errors.email && (
                 <p role="alert" className="mt-1 text-xs font-medium text-[#B83927]">
@@ -707,8 +716,8 @@ export function KoiAuthPortal() {
                   setBrief(e.target.value);
                   if (errors.brief) setErrors((p) => ({ ...p, brief: undefined }));
                 }}
-                placeholder="Tell us the workflow, agent, or platform you want JXLab to engineer..."
-                className="mt-1.5 block w-full rounded-xl border border-[#D8C6A8] bg-white/90 px-3.5 py-2.5 text-sm text-[#1E1712] placeholder:text-[#9C8977] focus:border-[#C59560] focus:outline-none focus:ring-2 focus:ring-[#C59560]/35"
+                placeholder="Describe the workflow to automate, the product to ship, or the internal tool your team needs…"
+                className="mt-1.5 block w-full rounded-xl border border-[#D8C6A8] bg-white/90 px-3.5 py-2.5 text-sm text-[#1E1712] placeholder:text-[#9C8977] focus:border-[#E88B2E] focus:outline-none focus:ring-2 focus:ring-[#E88B2E]/35"
               />
               {errors.brief && (
                 <p role="alert" className="mt-1 text-xs font-medium text-[#B83927]">
@@ -720,11 +729,15 @@ export function KoiAuthPortal() {
             <button
               type="submit"
               disabled={submittingBrief}
-              className="mt-2 flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-[#C59560] px-6 py-3 text-sm font-bold text-[#1B120A] shadow-[0_8px_22px_rgba(116,74,30,0.28)] transition hover:bg-[#B4834D] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1E1712]"
+              className="mt-2 flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-[#E88B2E] px-6 py-3 text-sm font-bold text-[#1B120A] shadow-[0_8px_22px_rgba(232,139,46,0.35)] transition hover:bg-[#F29A42] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1E1712]"
             >
               <Send className="h-4 w-4" />
-              {submittingBrief ? "Sending brief..." : "Send Project Brief"}
+              {submittingBrief ? "Sending brief..." : "Get architecture brief"}
             </button>
+
+            <p className="text-center font-mono text-[11px] leading-relaxed text-[#7A5638]">
+              100% client IP · Senior engineering pod · Reply within 24h
+            </p>
           </form>
         ) : (
           <>
@@ -847,7 +860,7 @@ export function KoiAuthPortal() {
 
               <button
                 type="submit"
-                className="mt-2 flex min-h-[48px] w-full items-center justify-center rounded-full bg-[#C59560] px-6 py-3 text-sm font-bold text-[#1B120A] shadow-[0_8px_22px_rgba(116,74,30,0.28)] transition hover:bg-[#B4834D] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1E1712]"
+                className="mt-2 flex min-h-[48px] w-full items-center justify-center rounded-full bg-[#E88B2E] px-6 py-3 text-sm font-bold text-[#1B120A] shadow-[0_8px_22px_rgba(232,139,46,0.35)] transition hover:bg-[#F29A42] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1E1712]"
               >
                 {mode === "signup" ? "Create account" : "Sign in"}
               </button>
@@ -879,6 +892,20 @@ export function KoiAuthPortal() {
                 </>
               )}
             </p>
+
+            {mode === "signup" && (
+              <button
+                type="button"
+                onClick={() => {
+                  setPortalView("scope");
+                  setErrors({});
+                  setStatusMessage(null);
+                }}
+                className="mt-3 w-full text-center text-xs font-semibold text-[#8E541B] underline-offset-4 hover:underline"
+              >
+                Prefer to scope a project without an account? →
+              </button>
+            )}
           </>
         )}
 

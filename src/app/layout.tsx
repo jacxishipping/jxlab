@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://jxlab.ai"),
   title: "JXLab — Agentic AI & Software Engineering Studio",
   description:
-    "JXLab is an agentic AI and software development startup turning complex workflows into autonomous, production-grade products.",
+    "JXLab is an agentic AI and software engineering studio. We build production AI agents, full-stack products, and custom internal software your team owns.",
   keywords: [
     "JXLab",
     "Agentic AI",

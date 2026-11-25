@@ -440,9 +440,10 @@ export function DepotSolutions() {
                         <button
                           type="button"
                           onClick={(e) => openSolution(item.slug, e)}
+                          aria-label={`Explore ${item.title}`}
                           className="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-[#1E1712] px-4 py-2 text-xs font-semibold text-[#FBF5E8] transition hover:bg-[#E88B2E] hover:text-[#1B120A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1E1712]"
                         >
-                          Explore solution
+                          See outcomes
                           <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                         </button>
                       </div>

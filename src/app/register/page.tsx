@@ -10,6 +10,7 @@ export default async function RegisterRedirectPage({
   const sp = await searchParams;
   const params = new URLSearchParams();
   params.set("next", "/register");
+  params.set("view", "scope");
   if (sp.track) params.set("track", sp.track);
   if (sp.project) params.set("project", sp.project);
   redirect(`/login?${params.toString()}`);
