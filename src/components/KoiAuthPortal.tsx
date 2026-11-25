@@ -31,10 +31,10 @@ function GoogleIcon() {
   );
 }
 
-type KoiPattern = "kohaku" | "sanke" | "showa" | "ogon" | "orange";
+type AgentPaletteKey = "cyan" | "amber" | "emerald" | "gold" | "violet";
 
-interface KoiFish {
-  pattern: KoiPattern;
+interface PixelAgentPacket {
+  palette: AgentPaletteKey;
   size: number;
   alpha: number;
   baseSpeed: number;
@@ -46,26 +46,27 @@ interface KoiFish {
   glideLeft: number;
   segments: { x: number; y: number }[];
   spacing: number;
-  baseColor: string;
-  patchColor: string;
-  accentColor: string;
-  finColor: string;
+  headColor: string;
+  trailColor: string;
+  coreColor: string;
+  wingColor: string;
 }
 
-const KOI_PALETTES: Record<
-  KoiPattern,
-  { base: string; patch: string; accent: string; fin: string }
+const AGENT_PALETTES: Record<
+  AgentPaletteKey,
+  { head: string; trail: string; core: string; wing: string }
 > = {
-  kohaku: { base: "#FBF5E8", patch: "#E4572E", accent: "#E4572E", fin: "#FCEAD0" },
-  sanke: { base: "#FBF5E8", patch: "#D94E2A", accent: "#222024", fin: "#F4E4CE" },
-  showa: { base: "#27232A", patch: "#E4572E", accent: "#FBF5E8", fin: "#CFC7BE" },
-  ogon: { base: "#F5B84B", patch: "#FCE19C", accent: "#E49A2B", fin: "#FCE7B3" },
-  orange: { base: "#E86A2E", patch: "#F6B96D", accent: "#C9471D", fin: "#F8C38A" },
+  cyan: { head: "#FBF5E8", trail: "#7CE5DB", core: "#38B2AC", wing: "#B2F5EA" },
+  amber: { head: "#FBF5E8", trail: "#E88B2E", core: "#F6B96D", wing: "#FDE0B5" },
+  emerald: { head: "#E6FFFA", trail: "#5BBF99", core: "#2F855A", wing: "#9AE6B4" },
+  gold: { head: "#FFF6DF", trail: "#F5B84B", core: "#D4761B", wing: "#FCE7B3" },
+  violet: { head: "#FBF5E8", trail: "#A78BFA", core: "#6D28D9", wing: "#DDD6FE" },
 };
 
 const TIMELINE_OPTIONS = ["2–4 Weeks", "4–8 Weeks", "Embedded Retainer"] as const;
 
-function PixelKoiPondCanvas() {
+// 1/5-resolution pixelated AI Agent Swarm & Neural Data-Stream Canvas (same articulated motion physics)
+function PixelAgentSwarmCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -78,9 +79,10 @@ function PixelKoiPondCanvas() {
 
     let cw = 256;
     let ch = 160;
-    let fishList: KoiFish[] = [];
+    let agents: PixelAgentPacket[] = [];
+    let gridNodes: { x: number; y: number; phase: number }[] = [];
 
-    const patterns: KoiPattern[] = ["kohaku", "sanke", "showa", "ogon", "orange"];
+    const paletteKeys: AgentPaletteKey[] = ["cyan", "amber", "emerald", "gold", "violet"];
 
     const wrapAngle = (a: number) => {
       while (a > Math.PI) a -= Math.PI * 2;
@@ -91,21 +93,21 @@ function PixelKoiPondCanvas() {
     const simulate = (dt: number, t: number) => {
       const margin = Math.min(cw, ch) * 0.12;
 
-      for (let i = 0; i < fishList.length; i++) {
-        const f = fishList[i];
-        const head = f.segments[0];
+      for (let i = 0; i < agents.length; i++) {
+        const a = agents[i];
+        const head = a.segments[0];
 
-        if (f.glideLeft > 0) {
-          f.glideLeft -= dt;
+        if (a.glideLeft > 0) {
+          a.glideLeft -= dt;
         } else if (Math.random() < 0.04 * dt) {
-          f.glideLeft = 2 + Math.random() * 2.5;
+          a.glideLeft = 2 + Math.random() * 2.5;
         }
-        const targetSpeed = f.glideLeft > 0 ? f.baseSpeed * 0.35 : f.baseSpeed;
-        f.speed += (targetSpeed - f.speed) * Math.min(1, dt * 2.5);
+        const targetSpeed = a.glideLeft > 0 ? a.baseSpeed * 0.35 : a.baseSpeed;
+        a.speed += (targetSpeed - a.speed) * Math.min(1, dt * 2.5);
 
         let turnRate =
-          0.6 * Math.sin(0.37 * t + f.wanderA) +
-          0.4 * Math.sin(0.83 * t + f.wanderB);
+          0.6 * Math.sin(0.37 * t + a.wanderA) +
+          0.4 * Math.sin(0.83 * t + a.wanderB);
 
         if (
           head.x < margin ||
@@ -114,61 +116,69 @@ function PixelKoiPondCanvas() {
           head.y > ch - margin
         ) {
           const toCenter = Math.atan2(ch * 0.5 - head.y, cw * 0.5 - head.x);
-          const diff = wrapAngle(toCenter - f.heading);
+          const diff = wrapAngle(toCenter - a.heading);
           turnRate += diff * 1.4;
         }
 
-        for (let j = 0; j < fishList.length; j++) {
+        for (let j = 0; j < agents.length; j++) {
           if (i === j) continue;
-          const other = fishList[j];
+          const other = agents[j];
           const oh = other.segments[0];
           const dx = head.x - oh.x;
           const dy = head.y - oh.y;
           const dist = Math.hypot(dx, dy);
-          const avoidR = 10 * (f.size + other.size);
+          const avoidR = 10 * (a.size + other.size);
           if (dist > 0.01 && dist < avoidR) {
             const away = Math.atan2(dy, dx);
-            const diff = wrapAngle(away - f.heading);
+            const diff = wrapAngle(away - a.heading);
             turnRate += diff * (1 - dist / avoidR) * 1.25;
           }
         }
 
         turnRate = Math.max(-1.2, Math.min(1.2, turnRate));
-        f.heading = wrapAngle(f.heading + turnRate * dt);
+        a.heading = wrapAngle(a.heading + turnRate * dt);
 
-        head.x += Math.cos(f.heading) * f.speed * dt;
-        head.y += Math.sin(f.heading) * f.speed * dt;
-        f.phase += (f.speed * 0.42 + 1.8) * dt;
+        head.x += Math.cos(a.heading) * a.speed * dt;
+        head.y += Math.sin(a.heading) * a.speed * dt;
+        a.phase += (a.speed * 0.42 + 1.8) * dt;
 
-        const n = f.segments.length;
+        const n = a.segments.length;
         for (let s = 1; s < n; s++) {
-          const prev = f.segments[s - 1];
-          const cur = f.segments[s];
+          const prev = a.segments[s - 1];
+          const cur = a.segments[s];
           const dx = cur.x - prev.x;
           const dy = cur.y - prev.y;
           const ang = Math.atan2(dy, dx);
           const tailWeight = Math.pow(s / (n - 1), 1.6);
-          const wave = Math.sin(f.phase - 0.55 * s) * tailWeight * 0.34;
-          cur.x = prev.x + Math.cos(ang + wave) * f.spacing;
-          cur.y = prev.y + Math.sin(ang + wave) * f.spacing;
+          const wave = Math.sin(a.phase - 0.55 * s) * tailWeight * 0.3;
+          cur.x = prev.x + Math.cos(ang + wave) * a.spacing;
+          cur.y = prev.y + Math.sin(ang + wave) * a.spacing;
         }
       }
     };
 
-    const initPond = () => {
+    const initSwarm = () => {
       cw = Math.max(84, Math.floor(window.innerWidth / 5));
       ch = Math.max(120, Math.floor(window.innerHeight / 5));
       canvas.width = cw;
       canvas.height = ch;
       ctx.imageSmoothingEnabled = false;
 
-      const count = window.innerWidth < 640 ? 5 : 8;
-      fishList = Array.from({ length: count }, (_, idx) => {
-        const pattern = patterns[idx % patterns.length];
-        const pal = KOI_PALETTES[pattern];
-        const size = 0.85 + (((idx * 37) % 100) / 100) * 0.7;
+      // Subtle background circuit grid nodes
+      gridNodes = [];
+      for (let gx = 16; gx < cw; gx += 26) {
+        for (let gy = 16; gy < ch; gy += 26) {
+          gridNodes.push({ x: gx, y: gy, phase: (gx * 0.17 + gy * 0.23) % 6.28 });
+        }
+      }
+
+      const count = window.innerWidth < 640 ? 6 : 9;
+      agents = Array.from({ length: count }, (_, idx) => {
+        const key = paletteKeys[idx % paletteKeys.length];
+        const pal = AGENT_PALETTES[key];
+        const size = 0.85 + (((idx * 37) % 100) / 100) * 0.65;
         const segCount = 10 + (idx % 4);
-        const spacing = 1.25 + 0.45 * size;
+        const spacing = 1.3 + 0.42 * size;
         const startX = (0.12 + ((idx * 0.29) % 0.76)) * cw;
         const startY = (0.14 + ((idx * 0.41) % 0.72)) * ch;
         const heading = (idx * 1.37) % (Math.PI * 2);
@@ -178,11 +188,11 @@ function PixelKoiPondCanvas() {
           y: startY - Math.sin(heading) * sIdx * spacing,
         }));
 
-        const baseSpeed = 9 + size * 4.5;
+        const baseSpeed = 9.5 + size * 4.5;
         return {
-          pattern,
+          palette: key,
           size,
-          alpha: 0.48 + ((size - 0.85) / 0.7) * 0.52,
+          alpha: 0.48 + ((size - 0.85) / 0.65) * 0.52,
           baseSpeed,
           speed: baseSpeed,
           heading,
@@ -192,121 +202,104 @@ function PixelKoiPondCanvas() {
           glideLeft: 0,
           segments,
           spacing,
-          baseColor: pal.base,
-          patchColor: pal.patch,
-          accentColor: pal.accent,
-          finColor: pal.fin,
+          headColor: pal.head,
+          trailColor: pal.trail,
+          coreColor: pal.core,
+          wingColor: pal.wing,
         };
       });
 
-      fishList.sort((a, b) => a.size - b.size);
+      agents.sort((a, b) => a.size - b.size);
 
       for (let wStep = 0; wStep < 40; wStep++) {
         simulate(0.05, wStep * 0.05);
       }
     };
 
-    const drawKoi = (f: KoiFish, shadowPass: boolean) => {
-      const n = f.segments.length;
+    const drawAgent = (a: PixelAgentPacket, shadowPass: boolean) => {
+      const n = a.segments.length;
       const ox = shadowPass ? 1.5 : 0;
       const oy = shadowPass ? 2.0 : 0;
 
       ctx.save();
-      ctx.globalAlpha = shadowPass ? f.alpha * 0.35 : f.alpha;
+      ctx.globalAlpha = shadowPass ? a.alpha * 0.35 : a.alpha;
 
-      const seg1 = f.segments[1];
-      const seg2 = f.segments[2];
-      const finAngle = Math.atan2(seg1.y - seg2.y, seg1.x - seg2.x);
-      const finLen = 3.4 + f.size * 1.4;
-      const finSweep = 0.95 + Math.sin(f.phase * 0.8) * 0.16;
+      // Pixelated stabilizer wings on agent chassis (segment 1)
+      const seg0 = a.segments[0];
+      const seg1 = a.segments[1];
+      const dirAngle = Math.atan2(seg0.y - seg1.y, seg0.x - seg1.x);
+      const wingLen = 3.2 + a.size * 1.5;
 
-      ctx.strokeStyle = shadowPass ? "#021218" : f.finColor;
-      ctx.lineWidth = Math.max(1, Math.round(f.size * 1.2));
+      ctx.strokeStyle = shadowPass ? "#021218" : a.wingColor;
+      ctx.lineWidth = Math.max(1, Math.round(a.size));
       for (const side of [-1, 1]) {
-        const a = finAngle + side * (Math.PI * 0.58 + finSweep * 0.2);
+        const wa = dirAngle + side * (Math.PI * 0.65);
         ctx.beginPath();
-        ctx.moveTo(seg2.x + ox, seg2.y + oy);
+        ctx.moveTo(seg1.x + ox, seg1.y + oy);
         ctx.lineTo(
-          seg2.x + ox + Math.cos(a) * finLen,
-          seg2.y + oy + Math.sin(a) * finLen
+          seg1.x + ox + Math.cos(wa) * wingLen,
+          seg1.y + oy + Math.sin(wa) * wingLen
         );
         ctx.stroke();
       }
 
-      const tailEnd = f.segments[n - 1];
-      const tailPrev = f.segments[n - 2];
-      const tailDir = Math.atan2(tailEnd.y - tailPrev.y, tailEnd.x - tailPrev.x);
-      const tailLen = 3.2 + f.size * 1.6;
-      ctx.strokeStyle = shadowPass ? "#021218" : f.finColor;
-      ctx.lineWidth = 1;
-      for (const spread of [-0.42, 0, 0.42]) {
-        ctx.beginPath();
-        ctx.moveTo(tailEnd.x + ox, tailEnd.y + oy);
-        ctx.lineTo(
-          tailEnd.x + ox + Math.cos(tailDir + spread) * tailLen,
-          tailEnd.y + oy + Math.sin(tailDir + spread) * tailLen
-        );
-        ctx.stroke();
-      }
-
+      // Articulated glowing pixel data-packet trail segments (square pixels for cyber/code aesthetic)
       for (let i = n - 1; i >= 0; i--) {
-        const seg = f.segments[i];
+        const seg = a.segments[i];
         const frac = i / (n - 1);
-        const radius =
-          (i === 0
-            ? 2.0
-            : Math.sin(Math.pow(1 - frac, 0.72) * Math.PI * 0.85) * 2.5 + 0.55) *
-          f.size;
+        const side = Math.max(
+          1,
+          Math.round((i === 0 ? 3.2 : (1 - frac * 0.72) * 3.0) * a.size)
+        );
+        const half = side / 2;
 
-        let color = f.baseColor;
         if (shadowPass) {
-          color = "#021218";
-        } else if (i === 1 || i === 2 || i === 5 || i === 6) {
-          color = f.patchColor;
-        } else if (i === 4 && (f.pattern === "sanke" || f.pattern === "showa")) {
-          color = f.accentColor;
+          ctx.fillStyle = "#021218";
+        } else if (i === 0) {
+          ctx.fillStyle = a.headColor;
+        } else if (i % 2 === 0) {
+          ctx.fillStyle = a.trailColor;
+        } else {
+          ctx.fillStyle = a.coreColor;
         }
 
-        ctx.fillStyle = color;
-        ctx.beginPath();
-        ctx.arc(seg.x + ox, seg.y + oy, Math.max(0.8, radius), 0, Math.PI * 2);
-        ctx.fill();
+        ctx.fillRect(
+          Math.round(seg.x + ox - half),
+          Math.round(seg.y + oy - half),
+          side,
+          side
+        );
       }
 
+      // Glowing optical sensor dot on agent nose
       if (!shadowPass) {
-        const h0 = f.segments[0];
-        const perp = f.heading + Math.PI / 2;
-        const eyeDist = 1.05 * f.size;
-        ctx.fillStyle = "#0C181C";
-        ctx.fillRect(
-          Math.round(h0.x + Math.cos(perp) * eyeDist),
-          Math.round(h0.y + Math.sin(perp) * eyeDist),
-          1,
-          1
-        );
-        ctx.fillRect(
-          Math.round(h0.x - Math.cos(perp) * eyeDist),
-          Math.round(h0.y - Math.sin(perp) * eyeDist),
-          1,
-          1
-        );
+        ctx.fillStyle = "#071E26";
+        ctx.fillRect(Math.round(seg0.x), Math.round(seg0.y), 1, 1);
       }
 
       ctx.restore();
     };
 
-    const render = () => {
+    const render = (t: number) => {
       ctx.clearRect(0, 0, cw, ch);
-      for (const f of fishList) drawKoi(f, true);
-      for (const f of fishList) drawKoi(f, false);
+
+      // Subtle pulsing circuit matrix dots
+      for (const node of gridNodes) {
+        const p = 0.08 + 0.1 * (0.5 + 0.5 * Math.sin(t * 1.4 + node.phase));
+        ctx.fillStyle = `rgba(124, 229, 219, ${p.toFixed(3)})`;
+        ctx.fillRect(node.x, node.y, 1, 1);
+      }
+
+      for (const a of agents) drawAgent(a, true);
+      for (const a of agents) drawAgent(a, false);
     };
 
-    initPond();
-    render();
+    initSwarm();
+    render(0);
 
     const onResize = () => {
-      initPond();
-      render();
+      initSwarm();
+      render(0);
     };
     window.addEventListener("resize", onResize);
 
@@ -324,7 +317,7 @@ function PixelKoiPondCanvas() {
         const dt = Math.min(0.06, elapsed / 1000);
         lastDraw = now;
         simulate(dt, now / 1000);
-        render();
+        render(now / 1000);
       }
       rafId = window.requestAnimationFrame(loop);
     };
@@ -540,8 +533,8 @@ export function KoiAuthPortal() {
           "radial-gradient(circle at 18% 22%, rgba(28, 122, 134, 0.52) 0%, transparent 48%), radial-gradient(circle at 82% 76%, rgba(232, 139, 46, 0.14) 0%, transparent 45%), radial-gradient(circle at 50% 45%, #0D4B59 0%, #072E3A 56%, #041D27 100%)",
       }}
     >
-      {/* Articulated 1/5-Resolution Pixelated Koi Pond Canvas */}
-      <PixelKoiPondCanvas />
+      {/* Articulated 1/5-Resolution Pixelated AI Agent Swarm Canvas */}
+      <PixelAgentSwarmCanvas />
 
       {/* Back to Home Link */}
       <div className="absolute left-4 top-4 z-20 sm:left-6 sm:top-6">

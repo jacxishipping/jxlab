@@ -75,13 +75,13 @@ export const jxlabConfig = {
   ] as NavItem[],
 
   sectionRail: [
-    { id: "hero", label: "Dawn Sky" },
-    { id: "about", label: "Terminal" },
-    { id: "solutions", label: "Solutions" },
+    { id: "hero", label: "Launchpad" },
+    { id: "about", label: "CRT Terminal" },
+    { id: "solutions", label: "Agent Pipeline" },
     { id: "builds", label: "Flagship Builds" },
     { id: "faq", label: "FAQ" },
-    { id: "team", label: "Team" },
-    { id: "cta", label: "Start a Project" },
+    { id: "team", label: "Agent Crew" },
+    { id: "cta", label: "Deploy Core" },
   ] as SectionRailItem[],
 
   hero: {
@@ -134,26 +134,25 @@ export const jxlabConfig = {
     ],
     closingPrompt: "> ready to ship?",
     asciiArt: String.raw`
-        /\          /\
-       /  \________/  \
-      /  .  ______  .  \
-     |  / \/      \/ \  |
-     | |  (◉)    (◉)  | |
-     |  \     /\     /  |
-      \  '---/  \---'  /
-    ___\____/    \____/___
-   /  _____   __   _____  \
-  |  |_   _|  \ \ / /  _ \ |
-  |    | |     \ V /| |_) ||
-  |  __| |     / . \|  _ < |
-  | |____/    /_/ \_\_| \_\|
-   \______________________/
-      [ JXLAB // CORE ]
+        |   |   |   |   |
+     +--+---+---+---+---+--+
+    -|  .---------------.  |-
+    -|  |  [◉]  ===  [◉]|  |-
+    -|  |   \   / \   / |  |-
+    -|  |  __> [ JX ]<__|  |-
+    -|  | /   \_____/  \|  |-
+    -|  '---------------'  |-
+     +--+---+---+---+---+--+
+        |   |   |   |   |
+      +-------------------+
+      |  AGENTIC AI CORE  |
+      |   < / >  v1.0     |
+      +-------------------+
 `,
   },
 
   solutionsSection: {
-    eyebrow: "SUNSET ENGINEERING DEPOT",
+    eyebrow: "AUTONOMOUS ENGINEERING PIPELINE",
     headline: "Systems Built to Run on Their Own",
     description:
       "Every engagement ships as clean, observable production software. Pick a track to inspect our reference architecture, deliverables, and sprint cadence.",
@@ -483,9 +482,9 @@ export const jxlabConfig = {
   },
 
   teamSection: {
-    eyebrow: "THE COLONY",
+    eyebrow: "AUTONOMOUS CREW",
     headline: "Meet the Builders",
-    hint: "Click any ant on the trail to inspect their role",
+    hint: "Click any agent bot on the bus to inspect their role",
     members: [
       {
         id: "founder",

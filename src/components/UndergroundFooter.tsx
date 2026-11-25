@@ -33,11 +33,11 @@ function SocialIcon({ icon }: { icon: SocialLink["icon"] }) {
   }
 }
 
-// Bidirectional SVG path-tangent tunnel ant (getPointAtLength + tangent rotation + scaleY flip + 26px end fade + gait scrub)
-function TunnelChamber({ mirror = false }: { mirror?: boolean }) {
+// Bidirectional SVG path-tangent fiber conduit patrolled by Nano-Agent Bots
+function FiberConduitBay({ mirror = false }: { mirror?: boolean }) {
   const pathRef = useRef<SVGPathElement>(null);
-  const ant1Ref = useRef<HTMLDivElement>(null);
-  const ant2Ref = useRef<HTMLDivElement>(null);
+  const bot1Ref = useRef<HTMLDivElement>(null);
+  const bot2Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const pathEl = pathRef.current;
@@ -47,47 +47,46 @@ function TunnelChamber({ mirror = false }: { mirror?: boolean }) {
     const totalLen = pathEl.getTotalLength();
     if (totalLen <= 10) return;
 
-    const ants = [
-      { el: ant1Ref.current, u: totalLen * 0.25, dir: 1, speed: 24, gait: 0 },
-      { el: ant2Ref.current, u: totalLen * 0.72, dir: -1, speed: 19, gait: 0.4 },
+    const bots = [
+      { el: bot1Ref.current, u: totalLen * 0.25, dir: 1, speed: 26, gait: 0 },
+      { el: bot2Ref.current, u: totalLen * 0.72, dir: -1, speed: 21, gait: 0.4 },
     ];
 
     let rafId = 0;
     let lastTime = performance.now();
 
     const step = (dt: number) => {
-      for (const a of ants) {
-        if (!a.el) continue;
-        const delta = a.speed * dt;
-        a.u += delta * a.dir;
+      for (const b of bots) {
+        if (!b.el) continue;
+        const delta = b.speed * dt;
+        b.u += delta * b.dir;
 
-        if (a.u >= totalLen) {
-          a.u = totalLen;
-          a.dir = -1;
-        } else if (a.u <= 0) {
-          a.u = 0;
-          a.dir = 1;
+        if (b.u >= totalLen) {
+          b.u = totalLen;
+          b.dir = -1;
+        } else if (b.u <= 0) {
+          b.u = 0;
+          b.dir = 1;
         }
 
-        const p = pathEl.getPointAtLength(a.u);
-        const lookAhead = Math.max(0, Math.min(totalLen, a.u + a.dir * 2.5));
+        const p = pathEl.getPointAtLength(b.u);
+        const lookAhead = Math.max(0, Math.min(totalLen, b.u + b.dir * 2.5));
         const p2 = pathEl.getPointAtLength(lookAhead);
         const angle = Math.atan2(p2.y - p.y, p2.x - p.x);
         const flipY = Math.cos(angle) < 0 ? -1 : 1;
 
-        // Fade smoothly over outer 26px of each tunnel end
-        const edgeDist = Math.min(a.u, totalLen - a.u);
+        const edgeDist = Math.min(b.u, totalLen - b.u);
         const opacity = Math.max(0, Math.min(1, edgeDist / 26));
 
-        a.gait = (a.gait + delta / 14) % 1;
+        b.gait = (b.gait + delta / 14) % 1;
 
-        a.el.style.transform = `translate3d(${p.x.toFixed(1)}px, ${p.y.toFixed(
+        b.el.style.transform = `translate3d(${p.x.toFixed(1)}px, ${p.y.toFixed(
           1
         )}px, 0) translate(-50%, -50%) rotate(${((angle * 180) / Math.PI).toFixed(
           1
         )}deg) scaleY(${flipY})`;
-        a.el.style.opacity = opacity.toFixed(3);
-        a.el.style.setProperty("--gait", a.gait.toFixed(4));
+        b.el.style.opacity = opacity.toFixed(3);
+        b.el.style.setProperty("--gait", b.gait.toFixed(4));
       }
     };
 
@@ -105,8 +104,9 @@ function TunnelChamber({ mirror = false }: { mirror?: boolean }) {
     return () => window.cancelAnimationFrame(rafId);
   }, []);
 
-  const tunnelD =
-    "M 176 105 C 128 105 108 68 72 62 C 40 56 18 76 20 98 C 22 122 48 136 78 132 C 110 126 128 144 176 144";
+  // Stepped PCB fiber conduit geometry
+  const conduitD =
+    "M 176 104 H 122 L 94 64 H 44 L 22 86 V 118 L 44 138 H 104 L 128 144 H 176";
 
   return (
     <div
@@ -116,28 +116,30 @@ function TunnelChamber({ mirror = false }: { mirror?: boolean }) {
       }`}
     >
       <svg viewBox="0 0 180 210" fill="none" className="h-full w-full">
-        {/* Dual-stroke SVG underground tunnel */}
+        {/* Dual-stroke subsurface fiber conduit */}
         <path
-          d={tunnelD}
-          stroke="#432B1D"
-          strokeWidth="32"
+          d={conduitD}
+          stroke="#1D3840"
+          strokeWidth="28"
           strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           ref={pathRef}
-          d={tunnelD}
-          stroke="#1D120B"
-          strokeWidth="20"
+          d={conduitD}
+          stroke="#0D1920"
+          strokeWidth="16"
           strokeLinecap="round"
+          strokeLinejoin="round"
         />
-        {/* Stored golden seeds / nodes */}
-        <circle cx="48" cy="96" r="5" fill="#F6B96D" />
-        <circle cx="64" cy="105" r="4" fill="#E88B2E" />
-        <circle cx="56" cy="84" r="3.5" fill="#FDE0B5" />
+        {/* Stored Compute / Weight Nodes inside Vault */}
+        <rect x="44" y="90" width="12" height="12" rx="3" fill="#F6B96D" />
+        <rect x="62" y="98" width="10" height="10" rx="2.5" fill="#7CE5DB" />
+        <rect x="52" y="76" width="8" height="8" rx="2" fill="#E88B2E" />
       </svg>
 
-      {/* Two bidirectional path-tangent ambient ants */}
-      {[ant1Ref, ant2Ref].map((ref, idx) => (
+      {/* Two bidirectional path-tangent Nano-Agent Bots */}
+      {[bot1Ref, bot2Ref].map((ref, idx) => (
         <div
           key={idx}
           ref={ref}
@@ -147,35 +149,43 @@ function TunnelChamber({ mirror = false }: { mirror?: boolean }) {
             <g className="ant-body-bob">
               <path
                 className="ant-leg-a"
-                d="M7 9L5 14M13 7L12 2M17 9L20 14"
-                stroke="#C59560"
+                d="M7 11L5 15M17 11L19 15"
+                stroke="#7CE5DB"
                 strokeWidth="1.2"
                 strokeLinecap="round"
               />
               <path
                 className="ant-leg-b"
-                d="M8 7L6 2M13 9L12 14M17 7L20 2"
-                stroke="#C59560"
+                d="M10 11L9 15M14 11L15 15"
+                stroke="#7CE5DB"
                 strokeWidth="1.2"
                 strokeLinecap="round"
               />
               <path
                 className="ant-antenna-l"
-                d="M21 7L25 4"
-                stroke="#C59560"
+                d="M21 6L25 3"
+                stroke="#F6B96D"
                 strokeWidth="1.1"
                 strokeLinecap="round"
               />
               <path
                 className="ant-antenna-r"
-                d="M21 9L25 12"
-                stroke="#C59560"
+                d="M21 10L25 13"
+                stroke="#7CE5DB"
                 strokeWidth="1.1"
                 strokeLinecap="round"
               />
-              <ellipse cx="6.5" cy="8" rx="3.2" ry="2.2" fill="#E88B2E" />
-              <ellipse cx="12.5" cy="8" rx="2.3" ry="1.8" fill="#C59560" />
-              <circle cx="18.2" cy="8" r="2.1" fill="#E88B2E" />
+              <rect
+                x="5"
+                y="4"
+                width="15"
+                height="8"
+                rx="2.5"
+                fill="#162A33"
+                stroke="#7CE5DB"
+                strokeWidth="1.1"
+              />
+              <circle cx="15" cy="8" r="1.5" fill="#F6B96D" />
             </g>
           </svg>
         </div>
@@ -189,7 +199,6 @@ export function UndergroundFooter() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [awake, setAwake] = useState(true);
 
-  // Pause offscreen ambient antennae via data-awake="false" (matching hackthenest.tech)
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -209,33 +218,33 @@ export function UndergroundFooter() {
       data-awake={awake ? "true" : "false"}
       className="soil-grain relative overflow-hidden"
       style={{
-        backgroundColor: "#1A110B",
+        backgroundColor: "#141315",
         backgroundImage:
-          "radial-gradient(rgba(197, 149, 96, 0.14) 1px, transparent 1px), radial-gradient(rgba(251, 245, 232, 0.05) 1px, transparent 1px), linear-gradient(180deg, #1F140D 0%, #170F0A 65%, #110B07 100%)",
-        backgroundSize: "22px 22px, 37px 37px, 100% 100%",
+          "radial-gradient(rgba(124, 229, 219, 0.12) 1px, transparent 1px), radial-gradient(rgba(246, 185, 109, 0.06) 1px, transparent 1px), linear-gradient(180deg, #161314 0%, #121011 65%, #0C0B0C 100%)",
+        backgroundSize: "24px 24px, 40px 40px, 100% 100%",
       }}
     >
-      {/* Closing Underground CTA Chamber */}
+      {/* Closing Subsurface Compute Core CTA Vault */}
       <section
         id="cta"
         className="relative scroll-mt-20 px-4 pb-20 pt-8 sm:px-6 sm:pb-24"
       >
         <div className="relative mx-auto flex max-w-6xl items-center justify-center">
-          <TunnelChamber />
+          <FiberConduitBay />
 
-          {/* Central Rounded Underground Ant-Chamber CTA */}
-          <div className="relative z-10 w-full max-w-2xl rounded-[2rem] border-2 border-[#C59560]/60 bg-gradient-to-b from-[#2B1B12] to-[#1D120C] px-6 py-12 text-center shadow-[0_24px_64px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(246,185,109,0.22)] sm:px-12 sm:py-16">
+          {/* Central Rounded Compute Core Vault CTA */}
+          <div className="relative z-10 w-full max-w-2xl rounded-[2rem] border-2 border-[#7CE5DB]/40 bg-gradient-to-b from-[#162229] to-[#11151A] px-6 py-12 text-center shadow-[0_24px_64px_rgba(0,0,0,0.65),inset_0_1px_0_rgba(124,229,219,0.22)] sm:px-12 sm:py-16">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-[#F6B96D]/60 to-transparent"
+              className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-[#7CE5DB]/65 to-transparent"
             />
-            <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#C59560]">
-              Colony Chamber // Launchpad
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#7CE5DB]">
+              Compute Core // Launchpad
             </p>
             <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-[#FBF5E8] sm:text-5xl">
               {undergroundCta.headline}
             </h2>
-            <p className="mt-4 font-mono text-xs tracking-wide text-[#DFC8AA] sm:text-sm">
+            <p className="mt-4 font-mono text-xs tracking-wide text-[#CFE0E2] sm:text-sm">
               {undergroundCta.subline}
             </p>
             <div className="mt-8 flex justify-center">
@@ -249,14 +258,14 @@ export function UndergroundFooter() {
             </div>
           </div>
 
-          <TunnelChamber mirror />
+          <FiberConduitBay mirror />
         </div>
 
-        {/* Social Tunnel */}
+        {/* Fiber Social Bus */}
         <div className="relative mx-auto mt-16 max-w-xl">
           <div
             aria-hidden="true"
-            className="absolute inset-x-4 top-1/2 h-2 -translate-y-1/2 rounded-full bg-[#2E1E14]"
+            className="absolute inset-x-4 top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-gradient-to-r from-[#1A2D34] via-[#7CE5DB]/40 to-[#1A2D34]"
           />
           <div className="relative z-10 flex items-center justify-center gap-3 sm:gap-5">
             {socialLinks.map((social) => (
@@ -270,7 +279,7 @@ export function UndergroundFooter() {
                     : undefined
                 }
                 aria-label={social.name}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#C59560]/40 bg-[#1B120C] text-[#FBF5E8] shadow-lg transition hover:-translate-y-0.5 hover:border-[#E88B2E] hover:bg-[#E88B2E] hover:text-[#1B120A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E88B2E]"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#7CE5DB]/35 bg-[#10191F] text-[#FBF5E8] shadow-lg transition hover:-translate-y-0.5 hover:border-[#E88B2E] hover:bg-[#E88B2E] hover:text-[#1B120A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E88B2E]"
               >
                 <SocialIcon icon={social.icon} />
               </a>
@@ -280,25 +289,25 @@ export function UndergroundFooter() {
       </section>
 
       {/* Bottom Legal Footer Bar */}
-      <footer className="border-t border-[#C59560]/20 bg-[#0E0906] px-4 py-8 sm:px-6">
+      <footer className="border-t border-[#7CE5DB]/15 bg-[#0A0D10] px-4 py-8 sm:px-6">
         <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <div>
-            <p className="font-mono text-xs text-[#C7B299]">{brand.copyright}</p>
-            <p className="mt-1 text-xs text-[#8D7862]">
-              Crafted with precision by JXLab · {brand.email}
+            <p className="font-mono text-xs text-[#C7D3D8]">{brand.copyright}</p>
+            <p className="mt-1 text-xs text-[#7D8C92]">
+              Engineered by JXLab · {brand.email}
             </p>
           </div>
 
           <div className="flex flex-col items-start gap-1.5 text-xs sm:items-end">
             <Link
               href="/privacy"
-              className="inline-flex min-h-[32px] items-center text-[#D8C4AA] underline-offset-4 transition hover:text-[#F6B96D] hover:underline"
+              className="inline-flex min-h-[32px] items-center text-[#C8D8DD] underline-offset-4 transition hover:text-[#F6B96D] hover:underline"
             >
               Privacy Notice
             </Link>
             <Link
               href="/terms"
-              className="inline-flex min-h-[32px] items-center text-[#D8C4AA] underline-offset-4 transition hover:text-[#F6B96D] hover:underline"
+              className="inline-flex min-h-[32px] items-center text-[#C8D8DD] underline-offset-4 transition hover:text-[#F6B96D] hover:underline"
             >
               Terms of Service
             </Link>

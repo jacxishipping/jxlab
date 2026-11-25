@@ -6,48 +6,56 @@ import { motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Github, Lock, Sparkles, TrendingUp } from "lucide-react";
 import { jxlabConfig } from "@/data/jxlabConfig";
 
-function EagleSilhouette() {
+// Autonomous AI Agent Delivery Drone replacing the soaring eagle
+function AgentDroneSilhouette() {
   return (
     <svg
       viewBox="0 0 180 76"
       fill="none"
-      className="h-14 w-32 drop-shadow-[0_10px_22px_rgba(0,0,0,0.5)] sm:h-20 sm:w-44"
+      className="h-14 w-32 drop-shadow-[0_10px_24px_rgba(0,0,0,0.55)] sm:h-20 sm:w-44"
       aria-hidden="true"
     >
+      {/* Rotor glow arcs */}
+      <ellipse cx="32" cy="22" rx="22" ry="4" fill="#7CE5DB" fillOpacity="0.45" />
+      <ellipse cx="148" cy="22" rx="22" ry="4" fill="#7CE5DB" fillOpacity="0.45" />
+      {/* Carbon-fiber wing arms */}
       <path
-        d="M8 46C34 18 68 8 92 26C110 10 144 6 172 22C146 28 128 40 112 52C104 58 96 62 86 64C78 58 66 56 54 58C40 50 24 46 8 46Z"
-        fill="#19101E"
-        stroke="#F6B96D"
-        strokeOpacity="0.65"
+        d="M28 24H152L134 40H46L28 24Z"
+        fill="#161426"
+        stroke="#7CE5DB"
+        strokeOpacity="0.7"
         strokeWidth="1.6"
       />
-      <path
-        d="M112 32C120 28 128 28 134 32C130 36 122 39 114 38Z"
-        fill="#FBF5E8"
-      />
-      <path d="M132 31L139 33L133 35Z" fill="#E88B2E" />
-      <path
-        d="M52 54L30 66L44 69L64 58Z"
-        fill="#24172C"
+      {/* Central AI agent core chassis */}
+      <rect
+        x="66"
+        y="26"
+        width="48"
+        height="24"
+        rx="7"
+        fill="#1E1729"
         stroke="#F6B96D"
-        strokeOpacity="0.4"
-        strokeWidth="1"
+        strokeWidth="1.6"
       />
+      {/* Glowing optical sensor visor */}
+      <rect x="77" y="34" width="26" height="7" rx="3.5" fill="#0B1E24" />
+      <circle cx="85" cy="37.5" r="2.2" fill="#7CE5DB" />
+      <circle cx="95" cy="37.5" r="2.2" fill="#F6B96D" />
+      {/* Payload deploy bay glow */}
+      <path d="M80 52L90 62L100 52Z" fill="#E88B2E" fillOpacity="0.85" />
     </svg>
   );
 }
 
-function FeatherGlyph() {
+// Spiraling glowing Code Artifact Shard replacing the dropping feather
+function CodeShardGlyph() {
   return (
-    <svg viewBox="0 0 36 18" fill="none" className="h-4.5 w-9" aria-hidden="true">
-      <path
-        d="M2 14C9 3 22 1 34 4C27 11 16 15 2 14Z"
-        fill="#FBF5E8"
-        stroke="#E88B2E"
-        strokeWidth="1.2"
-      />
-      <path d="M4 13C14 9 23 6 32 4.5" stroke="#C66C19" strokeWidth="1" />
-    </svg>
+    <div
+      aria-hidden="true"
+      className="inline-flex items-center justify-center rounded-md border border-[#7CE5DB]/75 bg-[#12252C]/95 px-2 py-1 font-mono text-[10px] font-bold text-[#F6B96D] shadow-[0_0_16px_rgba(124,229,219,0.55)]"
+    >
+      &lt;/&gt;
+    </div>
   );
 }
 
@@ -239,7 +247,7 @@ export function BuildsMarquee() {
               }}
               className="pointer-events-none fixed left-0 top-[22vh] z-40"
             >
-              <EagleSilhouette />
+              <AgentDroneSilhouette />
             </motion.div>
           )}
 
@@ -280,7 +288,7 @@ export function BuildsMarquee() {
                       }}
                       className="pointer-events-none absolute left-1/2 top-0 z-20 -translate-x-1/2"
                     >
-                      <FeatherGlyph />
+                      <CodeShardGlyph />
                     </motion.div>
                   )}
 

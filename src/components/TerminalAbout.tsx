@@ -273,33 +273,71 @@ export function TerminalAbout() {
           "linear-gradient(180deg, #0B1E21 0%, rgba(11, 33, 38, 0.96) 62%, rgba(20, 17, 36, 0.45) 90%, rgba(20, 17, 36, 0) 100%)",
       }}
     >
-      {/* Overhead Leafy Canopy Framing */}
+      {/* Overhead PCB Circuit Traces & Logic Bus Framing (lifts up on scroll exit) */}
       <motion.div
         style={{ y: foliageY, opacity: foliageOpacity }}
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 flex justify-between"
       >
-        <svg viewBox="0 0 320 200" className="h-36 w-52 sm:h-48 sm:w-80" fill="none">
+        <svg viewBox="0 0 340 200" className="h-36 w-56 sm:h-48 sm:w-84" fill="none">
           <path
-            d="M0 0H280C226 36 172 64 118 102C76 132 36 156 0 184V0Z"
-            fill="#071517"
+            d="M0 24H150L188 62H286M0 64H96L134 102H214M0 112H62L92 142H146"
+            stroke="#70D6CE"
+            strokeOpacity="0.32"
+            strokeWidth="2"
           />
-          <ellipse cx="165" cy="48" rx="40" ry="15" transform="rotate(-18 165 48)" fill="#153A3B" />
-          <ellipse cx="96" cy="96" rx="34" ry="13" transform="rotate(-24 96 96)" fill="#174140" />
-          <ellipse cx="48" cy="140" rx="26" ry="11" transform="rotate(-28 48 140)" fill="#113133" />
+          <path
+            d="M44 0V46L78 80H168"
+            stroke="#F6B96D"
+            strokeOpacity="0.32"
+            strokeWidth="1.8"
+          />
+          <circle cx="286" cy="62" r="4.5" fill="#7CE5DB" fillOpacity="0.65" />
+          <circle cx="214" cy="102" r="4" fill="#F6B96D" fillOpacity="0.7" />
+          <circle cx="146" cy="142" r="3.5" fill="#7CE5DB" fillOpacity="0.6" />
+          <rect
+            x="166"
+            y="72"
+            width="16"
+            height="16"
+            rx="3"
+            fill="#0B272C"
+            stroke="#F6B96D"
+            strokeOpacity="0.55"
+            strokeWidth="1.5"
+          />
         </svg>
         <svg
-          viewBox="0 0 320 200"
-          className="h-36 w-52 -scale-x-100 sm:h-48 sm:w-80"
+          viewBox="0 0 340 200"
+          className="h-36 w-56 -scale-x-100 sm:h-48 sm:w-84"
           fill="none"
         >
           <path
-            d="M0 0H280C226 36 172 64 118 102C76 132 36 156 0 184V0Z"
-            fill="#071517"
+            d="M0 24H150L188 62H286M0 64H96L134 102H214M0 112H62L92 142H146"
+            stroke="#70D6CE"
+            strokeOpacity="0.32"
+            strokeWidth="2"
           />
-          <ellipse cx="165" cy="48" rx="40" ry="15" transform="rotate(-18 165 48)" fill="#153A3B" />
-          <ellipse cx="96" cy="96" rx="34" ry="13" transform="rotate(-24 96 96)" fill="#174140" />
-          <ellipse cx="48" cy="140" rx="26" ry="11" transform="rotate(-28 48 140)" fill="#113133" />
+          <path
+            d="M44 0V46L78 80H168"
+            stroke="#F6B96D"
+            strokeOpacity="0.32"
+            strokeWidth="1.8"
+          />
+          <circle cx="286" cy="62" r="4.5" fill="#7CE5DB" fillOpacity="0.65" />
+          <circle cx="214" cy="102" r="4" fill="#F6B96D" fillOpacity="0.7" />
+          <circle cx="146" cy="142" r="3.5" fill="#7CE5DB" fillOpacity="0.6" />
+          <rect
+            x="166"
+            y="72"
+            width="16"
+            height="16"
+            rx="3"
+            fill="#0B272C"
+            stroke="#F6B96D"
+            strokeOpacity="0.55"
+            strokeWidth="1.5"
+          />
         </svg>
       </motion.div>
 

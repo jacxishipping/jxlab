@@ -5,87 +5,84 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { jxlabConfig, type TeamMember } from "@/data/jxlabConfig";
 
-// Articulated ant with distance-locked tripod legs (--gait), body bob, and wiggling antennae
-function ArticulatedAnt({ highlighted }: { highlighted: boolean }) {
-  const stroke = highlighted ? "#FFCF7A" : "#D6B792";
-  const body = highlighted ? "#E88B2E" : "#3E2618";
-  const bodyStroke = highlighted ? "#FBF5E8" : "#C59560";
+// Articulated AI Agent Bot with distance-locked stride legs (--gait), bobbing chassis, glowing visor & signal antennae
+function ArticulatedAgentBot({ highlighted }: { highlighted: boolean }) {
+  const accent = highlighted ? "#FFCF7A" : "#7CE5DB";
+  const shell = highlighted ? "#E88B2E" : "#182830";
+  const border = highlighted ? "#FBF5E8" : "#70D6CE";
 
   return (
     <svg
-      viewBox="0 0 44 26"
+      viewBox="0 0 44 28"
       fill="none"
-      className="h-5 w-9 shrink-0 overflow-visible"
+      className="h-6 w-10 shrink-0 overflow-visible"
       aria-hidden="true"
     >
       <g className="ant-body-bob">
-        {/* Tripod Leg Set A */}
+        {/* Articulated Robotic Stride Legs Set A */}
         <path
           className="ant-leg-a"
-          d="M12 14L8 22M22 11L21 4M28 14L32 22"
-          stroke={stroke}
-          strokeWidth="1.5"
+          d="M14 19L10 26M26 19L30 26"
+          stroke={accent}
+          strokeWidth="1.8"
           strokeLinecap="round"
         />
-        {/* Tripod Leg Set B */}
+        {/* Articulated Robotic Stride Legs Set B */}
         <path
           className="ant-leg-b"
-          d="M13 11L10 4M21 14L20 22M28 11L32 4"
-          stroke={stroke}
-          strokeWidth="1.5"
+          d="M18 19L16 26M23 19L25 26"
+          stroke={accent}
+          strokeWidth="1.8"
           strokeLinecap="round"
         />
-        {/* Independent Wiggling Antennae */}
+        {/* Dual Telemetry Signal Antennae */}
         <path
           className="ant-antenna-l"
-          d="M34 11L40 6"
-          stroke={stroke}
-          strokeWidth="1.35"
+          d="M16 7L12 1"
+          stroke={accent}
+          strokeWidth="1.4"
           strokeLinecap="round"
         />
+        <circle cx="12" cy="1.5" r="1.4" fill="#F6B96D" />
         <path
           className="ant-antenna-r"
-          d="M34 14L40 18"
-          stroke={stroke}
-          strokeWidth="1.35"
+          d="M28 7L32 1"
+          stroke={accent}
+          strokeWidth="1.4"
           strokeLinecap="round"
         />
-        {/* Abdomen, thorax, head */}
-        <ellipse
-          cx="11"
-          cy="12.5"
-          rx="5.4"
-          ry="3.8"
-          fill={body}
-          stroke={bodyStroke}
-          strokeWidth="1.2"
+        <circle cx="32" cy="1.5" r="1.4" fill="#7CE5DB" />
+
+        {/* Agent Chassis Body */}
+        <rect
+          x="10"
+          y="7"
+          width="24"
+          height="13"
+          rx="4"
+          fill={shell}
+          stroke={border}
+          strokeWidth="1.4"
         />
-        <ellipse
-          cx="21"
-          cy="12.5"
-          rx="3.8"
-          ry="2.8"
-          fill={body}
-          stroke={bodyStroke}
-          strokeWidth="1.2"
-        />
-        <circle
-          cx="30"
-          cy="12.4"
-          r="3.4"
-          fill={body}
-          stroke={bodyStroke}
-          strokeWidth="1.2"
-        />
+        {/* Glowing Optical Visor & Eyes */}
+        <rect x="14" y="10.5" width="16" height="6" rx="2.5" fill="#0A1419" />
+        <circle cx="18.5" cy="13.5" r="1.6" fill={highlighted ? "#FBF5E8" : "#7CE5DB"} />
+        <circle cx="25.5" cy="13.5" r="1.6" fill="#F6B96D" />
       </g>
     </svg>
   );
 }
 
-// Interactive Meadow Grass Canvas with dual-frequency wind, pointer parting, glow-flowers & Lissajous fireflies
-function MeadowGrassCanvas() {
+// Interactive Fiber-Optic Neural Signal Field & Lissajous Data Sparks Canvas (pointer + touch interactive)
+function NeuralSignalCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mouseRef = useRef<{ x: number; y: number; active: boolean; sx: number; sy: number }>({
+  const mouseRef = useRef<{
+    x: number;
+    y: number;
+    active: boolean;
+    sx: number;
+    sy: number;
+  }>({
     x: -999,
     y: -999,
     active: false,
@@ -105,7 +102,7 @@ function MeadowGrassCanvas() {
     let h = 0;
     let dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    interface Blade {
+    interface FiberStrand {
       x: number;
       baseY: number;
       height: number;
@@ -114,14 +111,14 @@ function MeadowGrassCanvas() {
       lean: number;
       hue: string;
     }
-    interface Flower {
+    interface LogicNode {
       x: number;
       baseY: number;
       height: number;
       phase: number;
       color: string;
     }
-    interface Firefly {
+    interface DataSpark {
       cx: number;
       cy: number;
       rx: number;
@@ -129,11 +126,12 @@ function MeadowGrassCanvas() {
       speed: number;
       phase: number;
       radius: number;
+      cyan: boolean;
     }
 
-    let blades: Blade[] = [];
-    let flowers: Flower[] = [];
-    let fireflies: Firefly[] = [];
+    let strands: FiberStrand[] = [];
+    let nodes: LogicNode[] = [];
+    let sparks: DataSpark[] = [];
 
     const buildScene = () => {
       const rect = canvas.getBoundingClientRect();
@@ -144,45 +142,46 @@ function MeadowGrassCanvas() {
       canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const bladeCount = Math.min(480, Math.max(180, Math.round(w * 0.36)));
-      blades = Array.from({ length: bladeCount }, (_, i) => {
-        const frac = i / bladeCount;
+      const strandCount = Math.min(420, Math.max(160, Math.round(w * 0.32)));
+      strands = Array.from({ length: strandCount }, (_, i) => {
+        const frac = i / strandCount;
         const jitter = ((i * 37) % 100) / 100;
-        const depth = (i % 3) / 2; // 0 = back, 1 = front
+        const depth = (i % 3) / 2;
         return {
-          x: frac * w + (jitter - 0.5) * 14,
+          x: frac * w + (jitter - 0.5) * 10,
           baseY: h - 4 + depth * 6,
-          height: 36 + jitter * 48 + depth * 14,
-          width: 1.6 + depth * 1.1,
+          height: 34 + jitter * 48 + depth * 14,
+          width: 1.4 + depth * 0.9,
           phase: frac * 11 + jitter * 4,
-          lean: (jitter - 0.5) * 8,
+          lean: (jitter - 0.5) * 6,
           hue:
             depth > 0.6
-              ? "#294833"
+              ? "rgba(112, 214, 206, 0.58)"
               : depth > 0.2
-                ? "#1F3B29"
-                : "#162C20",
+                ? "rgba(64, 152, 154, 0.45)"
+                : "rgba(38, 96, 108, 0.38)",
         };
       });
 
-      const flowerCount = Math.min(42, Math.max(16, Math.round(w / 32)));
-      flowers = Array.from({ length: flowerCount }, (_, i) => ({
-        x: ((i * 97 + 23) % 1000) / 1000 * w,
+      const nodeCount = Math.min(44, Math.max(18, Math.round(w / 30)));
+      nodes = Array.from({ length: nodeCount }, (_, i) => ({
+        x: (((i * 97 + 23) % 1000) / 1000) * w,
         baseY: h - 2,
-        height: 28 + ((i * 29) % 34),
+        height: 28 + ((i * 29) % 38),
         phase: i * 1.1,
-        color: i % 3 === 0 ? "#FFCF7A" : i % 3 === 1 ? "#F6A868" : "#FBF5E8",
+        color: i % 3 === 0 ? "#FFCF7A" : i % 3 === 1 ? "#7CE5DB" : "#F6B96D",
       }));
 
-      const fireflyCount = Math.min(44, Math.max(20, Math.round(w / 30)));
-      fireflies = Array.from({ length: fireflyCount }, (_, i) => ({
-        cx: ((i * 137.5) % 100) / 100 * w,
-        cy: 18 + ((i * 53) % 72) / 100 * (h - 46),
+      const sparkCount = Math.min(42, Math.max(20, Math.round(w / 30)));
+      sparks = Array.from({ length: sparkCount }, (_, i) => ({
+        cx: (((i * 137.5) % 100) / 100) * w,
+        cy: 18 + (((i * 53) % 72) / 100) * (h - 46),
         rx: 22 + (i % 5) * 12,
         ry: 10 + (i % 4) * 7,
         speed: 0.45 + (i % 5) * 0.14,
         phase: i * 1.7,
-        radius: 1.3 + (i % 3) * 0.55,
+        radius: 1.4 + (i % 3) * 0.5,
+        cyan: i % 2 === 0,
       }));
     };
 
@@ -194,7 +193,6 @@ function MeadowGrassCanvas() {
       lastTime = now;
       const t = prefersReduced ? 0 : now / 1000;
 
-      // Smooth pointer interpolation (1 - 0.0004^dt)
       const m = mouseRef.current;
       const alpha = 1 - Math.pow(0.0004, dt);
       if (m.active) {
@@ -212,46 +210,51 @@ function MeadowGrassCanvas() {
 
       ctx.clearRect(0, 0, w, h);
 
-      // Subtle misty ground base
+      // Subtle glowing subsurface circuit horizon
       const horizonGrad = ctx.createLinearGradient(0, h - 55, 0, h);
-      horizonGrad.addColorStop(0, "rgba(25, 48, 34, 0)");
-      horizonGrad.addColorStop(0.7, "rgba(31, 56, 39, 0.72)");
-      horizonGrad.addColorStop(1, "#2C1D14");
+      horizonGrad.addColorStop(0, "rgba(18, 42, 48, 0)");
+      horizonGrad.addColorStop(0.68, "rgba(16, 44, 52, 0.72)");
+      horizonGrad.addColorStop(1, "#121D24");
       ctx.fillStyle = horizonGrad;
       ctx.fillRect(0, h - 55, w, 55);
 
-      // Draw Lissajous Fireflies
-      for (const ff of fireflies) {
-        const a = t * ff.speed + ff.phase;
-        const fx = ff.cx + Math.sin(a) * ff.rx;
-        const fy = ff.cy + 0.6 * Math.sin(1.7 * a + 1) * ff.ry;
-        const pulse = 0.4 + 0.6 * (0.5 + 0.5 * Math.sin(t * 2.2 + ff.phase));
+      // Orbiting Lissajous Data Sparks
+      for (const sp of sparks) {
+        const a = t * sp.speed + sp.phase;
+        const fx = sp.cx + Math.sin(a) * sp.rx;
+        const fy = sp.cy + 0.6 * Math.sin(1.7 * a + 1) * sp.ry;
+        const pulse = 0.4 + 0.6 * (0.5 + 0.5 * Math.sin(t * 2.2 + sp.phase));
 
-        const glow = ctx.createRadialGradient(fx, fy, 0, fx, fy, ff.radius * 5.5);
-        glow.addColorStop(0, `rgba(255, 222, 138, ${0.85 * pulse})`);
-        glow.addColorStop(0.4, `rgba(232, 139, 46, ${0.32 * pulse})`);
-        glow.addColorStop(1, "rgba(232, 139, 46, 0)");
+        const glow = ctx.createRadialGradient(fx, fy, 0, fx, fy, sp.radius * 5.5);
+        if (sp.cyan) {
+          glow.addColorStop(0, `rgba(124, 229, 219, ${0.85 * pulse})`);
+          glow.addColorStop(0.4, `rgba(56, 178, 172, ${0.3 * pulse})`);
+          glow.addColorStop(1, "rgba(56, 178, 172, 0)");
+        } else {
+          glow.addColorStop(0, `rgba(255, 222, 138, ${0.85 * pulse})`);
+          glow.addColorStop(0.4, `rgba(232, 139, 46, ${0.32 * pulse})`);
+          glow.addColorStop(1, "rgba(232, 139, 46, 0)");
+        }
         ctx.fillStyle = glow;
         ctx.beginPath();
-        ctx.arc(fx, fy, ff.radius * 5.5, 0, Math.PI * 2);
+        ctx.arc(fx, fy, sp.radius * 5.5, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.fillStyle = `rgba(255, 246, 214, ${0.9 * pulse})`;
-        ctx.beginPath();
-        ctx.arc(fx, fy, ff.radius, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.fillStyle = sp.cyan
+          ? `rgba(218, 255, 251, ${0.9 * pulse})`
+          : `rgba(255, 246, 214, ${0.9 * pulse})`;
+        ctx.fillRect(fx - sp.radius * 0.8, fy - sp.radius * 0.8, sp.radius * 1.6, sp.radius * 1.6);
       }
 
-      // Draw Wind-Swaying Grass Blades with Quadratic Bend & Interactive Pointer Parting
+      // Interactive Swaying Fiber-Optic Signal Strands (part radially around pointer/touch)
       const mouseRadius = 85;
-      for (const b of blades) {
+      for (const b of strands) {
         const swell =
           Math.sin(t * 0.7 + b.phase) + 0.5 * Math.sin(t * 1.31 + b.phase * 2.1);
         const shiver = 0.28 * Math.sin(t * 2.6 + b.phase * 3.1);
-        let tipDx = b.lean + (swell * 8.5 + shiver * 3.2);
+        let tipDx = b.lean + (swell * 7.5 + shiver * 2.8);
         let pressY = 0;
 
-        // Interactive radial pointer parting
         if (m.sx > -500) {
           const dx = b.x - m.sx;
           const dy = b.baseY - b.height * 0.5 - m.sy;
@@ -278,24 +281,24 @@ function MeadowGrassCanvas() {
         ctx.stroke();
       }
 
-      // Draw Wind-Nodding Pulsing Glow-Flowers
-      for (const fl of flowers) {
-        const nod = Math.sin(t * 0.9 + fl.phase) * 5;
-        const pulse = 0.55 + 0.45 * Math.sin(t * 1.8 + fl.phase);
-        const fx = fl.x + nod;
-        const fy = fl.baseY - fl.height;
+      // Pulsing Glowing Logic-Node Tips along the Signal Field
+      for (const nd of nodes) {
+        const nod = Math.sin(t * 0.9 + nd.phase) * 5;
+        const pulse = 0.55 + 0.45 * Math.sin(t * 1.8 + nd.phase);
+        const fx = nd.x + nod;
+        const fy = nd.baseY - nd.height;
 
-        ctx.strokeStyle = "#2A4A35";
+        ctx.strokeStyle = "rgba(112, 214, 206, 0.45)";
         ctx.lineWidth = 1.2;
         ctx.beginPath();
-        ctx.moveTo(fl.x, fl.baseY);
-        ctx.quadraticCurveTo(fl.x + nod * 0.4, fl.baseY - fl.height * 0.5, fx, fy);
+        ctx.moveTo(nd.x, nd.baseY);
+        ctx.quadraticCurveTo(nd.x + nod * 0.4, nd.baseY - nd.height * 0.5, fx, fy);
         ctx.stroke();
 
         ctx.globalAlpha = pulse;
-        ctx.fillStyle = fl.color;
+        ctx.fillStyle = nd.color;
         ctx.beginPath();
-        ctx.arc(fx, fy, 2.3, 0, Math.PI * 2);
+        ctx.arc(fx, fy, 2.4, 0, Math.PI * 2);
         ctx.fill();
         ctx.globalAlpha = 1;
       }
@@ -364,13 +367,12 @@ function MeadowGrassCanvas() {
 export function AntTrailTeam() {
   const { teamSection } = jxlabConfig;
   const stageRef = useRef<HTMLDivElement>(null);
-  const antButtonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const botButtonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [stageWidth, setStageWidth] = useState<number>(960);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const pausedRef = useRef(false);
   const [isPausedState, setIsPausedState] = useState(false);
 
-  // Track stage width for responsive wave curve
   useEffect(() => {
     const el = stageRef.current;
     if (!el) return;
@@ -398,8 +400,7 @@ export function AntTrailTeam() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [selectedId]);
 
-  // Smooth wave curve matching hackthenest.tech's multi-harmonic trailZ(x)
-  const evalTrailY = useMemo(() => {
+  const evalBusY = useMemo(() => {
     return (x: number, w: number) => {
       const nx = x / Math.max(300, w);
       return (
@@ -410,25 +411,23 @@ export function AntTrailTeam() {
     };
   }, []);
 
-  // Build matching decorative SVG path string
-  const trailPathSvg = useMemo(() => {
+  const busPathSvg = useMemo(() => {
     const pts: string[] = [];
     const steps = 48;
     for (let i = 0; i <= steps; i++) {
       const x = (i / steps) * stageWidth;
-      const y = evalTrailY(x, stageWidth);
+      const y = evalBusY(x, stageWidth);
       pts.push(`${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`);
     }
     return pts.join(" ");
-  }, [stageWidth, evalTrailY]);
+  }, [stageWidth, evalBusY]);
 
-  // Continuous physics-gait ant loop with exponential deceleration (1 - exp(-7*dt))
   useEffect(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const count = teamSection.members.length;
     const margin = 90;
     const span = stageWidth + margin * 2;
-    const baseSpeed = Math.max(34, stageWidth * 0.045); // px/s
+    const baseSpeed = Math.max(34, stageWidth * 0.045);
 
     const positions = teamSection.members.map((_, idx) => {
       return (idx / count) * span - margin + 60;
@@ -440,11 +439,10 @@ export function AntTrailTeam() {
 
     const applyPositions = (tSec: number, dt: number) => {
       const targetVel = prefersReduced || pausedRef.current ? 0 : 1;
-      // Exponential smooth ease matching hackthenest.tech: 1 - exp(-7*dt)
       velocityFactor += (targetVel - velocityFactor) * (1 - Math.exp(-7 * dt));
 
       for (let i = 0; i < count; i++) {
-        const btn = antButtonRefs.current[i];
+        const btn = botButtonRefs.current[i];
         if (!btn) continue;
 
         const pace = prefersReduced
@@ -461,18 +459,16 @@ export function AntTrailTeam() {
           ? ((i + 0.65) / (count + 0.3)) * stageWidth
           : positions[i];
 
-        const baseY = evalTrailY(x, stageWidth);
+        const baseY = evalBusY(x, stageWidth);
         const weaveY = prefersReduced
           ? 0
           : 4.5 * Math.sin(0.025 * x + i * 1.7);
         const y = baseY + weaveY;
 
-        // Tangent slope tilt (0.7 * atan2(dy, dx))
-        const yNext = evalTrailY(x + 4, stageWidth);
+        const yNext = evalBusY(x + 4, stageWidth);
         const slopeRad = Math.atan2(yNext - baseY, 4);
-        const tiltDeg = (slopeRad * 180) / Math.PI * 0.7;
+        const tiltDeg = ((slopeRad * 180) / Math.PI) * 0.7;
 
-        // Distance-locked tripod stride (--gait)
         const stridePx = 22;
         gaits[i] = (gaits[i] + Math.abs(dx) / stridePx) % 1;
 
@@ -484,9 +480,7 @@ export function AntTrailTeam() {
       }
     };
 
-    // Initial paint
     applyPositions(0, 0);
-
     if (prefersReduced) return;
 
     const tick = (now: number) => {
@@ -498,7 +492,7 @@ export function AntTrailTeam() {
 
     rafId = window.requestAnimationFrame(tick);
     return () => window.cancelAnimationFrame(rafId);
-  }, [stageWidth, evalTrailY, teamSection.members]);
+  }, [stageWidth, evalBusY, teamSection.members]);
 
   const selectedMember: TeamMember | null = useMemo(
     () => teamSection.members.find((m) => m.id === selectedId) ?? null,
@@ -508,9 +502,9 @@ export function AntTrailTeam() {
   return (
     <section
       id="team"
-      className="relative scroll-mt-20 overflow-hidden bg-gradient-to-b from-[#0D0A16] via-[#10101D] to-[#121620]"
+      className="relative scroll-mt-20 overflow-hidden bg-gradient-to-b from-[#0D0A16] via-[#0E1320] to-[#111B23]"
     >
-      {/* Heading over Starry Meadow Horizon */}
+      {/* Heading over Interactive Neural Signal Horizon */}
       <div className="relative pt-14 sm:pt-20">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
@@ -519,72 +513,78 @@ export function AntTrailTeam() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6"
         >
-          <span className="inline-flex items-center rounded-full border border-[#FBF5E8]/20 bg-[#121933]/75 px-3.5 py-1 font-mono text-xs font-semibold tracking-widest text-[#F6B96D]">
+          <span className="inline-flex items-center rounded-full border border-[#7CE5DB]/30 bg-[#0E2028]/80 px-3.5 py-1 font-mono text-xs font-semibold tracking-widest text-[#7CE5DB]">
             {teamSection.eyebrow}
           </span>
           <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-[#FBF5E8] sm:text-5xl">
             {teamSection.headline}
           </h2>
-          <p className="mt-3 font-mono text-xs text-[#C7CFE8]/80 sm:text-sm">
-            {teamSection.hint} · Move cursor across the meadow to part the grass
+          <p className="mt-3 font-mono text-xs text-[#C7D6E4]/85 sm:text-sm">
+            {teamSection.hint} · Sweep cursor across the signal field to ripple the fibers
           </p>
         </motion.div>
 
-        {/* Interactive Wind-Swaying Meadow Grass, Glow-Flowers & Lissajous Fireflies */}
+        {/* Interactive Swaying Fiber-Optic Signal Field & Data Sparks */}
         <div className="relative mt-2 -mb-1 w-full">
-          <MeadowGrassCanvas />
+          <NeuralSignalCanvas />
         </div>
       </div>
 
-      {/* Underground Root Tunnels & Physics-Gait Ant Trail */}
+      {/* Subsurface Circuit Conduits & Marching Articulated AI Agent Bots */}
       <div
         className="soil-grain relative px-4 pb-20 pt-8 sm:px-6 sm:pb-24"
         style={{
-          backgroundColor: "#281A12",
+          backgroundColor: "#121D24",
           backgroundImage:
-            "radial-gradient(rgba(197, 149, 96, 0.14) 1px, transparent 1px), radial-gradient(rgba(251, 245, 232, 0.05) 1px, transparent 1px), linear-gradient(180deg, #2C1D14 0%, #241710 60%, #1F140D 100%)",
-          backgroundSize: "22px 22px, 37px 37px, 100% 100%",
+            "radial-gradient(rgba(124, 229, 219, 0.14) 1px, transparent 1px), radial-gradient(rgba(246, 185, 109, 0.08) 1px, transparent 1px), linear-gradient(180deg, #121D24 0%, #151A20 55%, #161314 100%)",
+          backgroundSize: "24px 24px, 40px 40px, 100% 100%",
         }}
       >
-        {/* Decorative Underground Tree Roots */}
+        {/* Decorative Subsurface PCB Circuit Conduits */}
         <svg
           aria-hidden="true"
           viewBox="0 0 1440 260"
           fill="none"
           preserveAspectRatio="none"
-          className="pointer-events-none absolute inset-x-0 top-0 h-52 w-full opacity-45"
+          className="pointer-events-none absolute inset-x-0 top-0 h-52 w-full opacity-40"
         >
           <path
-            d="M140 0C145 55 110 92 72 136M140 0C165 48 198 76 236 104M188 64C184 95 196 122 214 144"
-            stroke="#4B3122"
-            strokeWidth="5"
+            d="M140 0V68L92 116V165M140 42L198 100H268"
+            stroke="#70D6CE"
+            strokeWidth="3"
             strokeLinecap="round"
+            strokeLinejoin="round"
           />
+          <circle cx="92" cy="165" r="5" fill="#7CE5DB" />
+          <circle cx="268" cy="100" r="5" fill="#F6B96D" />
           <path
-            d="M1260 0C1252 60 1292 104 1335 148M1260 0C1222 52 1178 84 1138 118M1204 66C1210 102 1196 132 1176 158"
-            stroke="#4B3122"
-            strokeWidth="5"
+            d="M1280 0V74L1330 124V170M1280 46L1216 110H1142"
+            stroke="#70D6CE"
+            strokeWidth="3"
             strokeLinecap="round"
+            strokeLinejoin="round"
           />
+          <circle cx="1330" cy="170" r="5" fill="#7CE5DB" />
+          <circle cx="1142" cy="110" r="5" fill="#F6B96D" />
           <path
-            d="M720 0C716 38 696 64 670 86M720 0C732 42 758 68 790 88"
-            stroke="#3E281B"
-            strokeWidth="3.5"
+            d="M720 0V52L682 90M720 34L764 78"
+            stroke="#F6B96D"
+            strokeWidth="2.5"
             strokeLinecap="round"
           />
         </svg>
 
         <div className="relative z-10 mx-auto max-w-5xl">
-          {/* Interactive Curved Ant Trail Stage */}
+          {/* Interactive Multi-Agent Fiber Bus Stage */}
           <div
             ref={stageRef}
             onMouseEnter={() => setIsPausedState(true)}
             onMouseLeave={() => setIsPausedState(false)}
             onFocusCapture={() => setIsPausedState(true)}
             onBlurCapture={() => setIsPausedState(false)}
-            className="relative mx-auto h-[250px] w-full overflow-hidden rounded-3xl border border-[#C59560]/22 bg-[#1A100A]/65 shadow-inner"
+            className="relative mx-auto h-[250px] w-full overflow-hidden rounded-3xl border border-[#7CE5DB]/22 bg-[#0C141A]/75 shadow-inner"
           >
-            {/* Dual-Stroke Carved Tunnel Track SVG */}
+            {/* Dual-Stroke Glowing Fiber-Optic Bus Track SVG */}
             <svg
               width={stageWidth}
               height={250}
@@ -594,28 +594,28 @@ export function AntTrailTeam() {
               className="pointer-events-none absolute inset-0 h-full w-full"
             >
               <path
-                d={trailPathSvg}
-                stroke="#3C2618"
+                d={busPathSvg}
+                stroke="#18323B"
                 strokeWidth="42"
                 strokeLinecap="round"
               />
               <path
-                d={trailPathSvg}
-                stroke="#25160E"
+                d={busPathSvg}
+                stroke="#0D1C22"
                 strokeWidth="26"
                 strokeLinecap="round"
               />
               <path
-                d={trailPathSvg}
-                stroke="#C59560"
-                strokeOpacity="0.32"
-                strokeWidth="1.8"
-                strokeDasharray="6 9"
+                d={busPathSvg}
+                stroke="#7CE5DB"
+                strokeOpacity="0.45"
+                strokeWidth="2"
+                strokeDasharray="7 9"
                 strokeLinecap="round"
               />
             </svg>
 
-            {/* Physics-Gait Marching Team Ants with Alternating Nametag Heights */}
+            {/* Physics-Gait Marching Articulated AI Agent Bots */}
             {teamSection.members.map((member, idx) => {
               const isSelected = selectedId === member.id;
               const isDimmed = Boolean(selectedId) && !isSelected;
@@ -625,7 +625,7 @@ export function AntTrailTeam() {
                 <button
                   key={member.id}
                   ref={(el) => {
-                    antButtonRefs.current[idx] = el;
+                    botButtonRefs.current[idx] = el;
                   }}
                   type="button"
                   onClick={() =>
@@ -652,7 +652,7 @@ export function AntTrailTeam() {
                     style={{ transform: "rotate(var(--ant-tilt, 0deg))" }}
                     className="inline-flex"
                   >
-                    <ArticulatedAnt highlighted={isSelected} />
+                    <ArticulatedAgentBot highlighted={isSelected} />
                   </span>
                 </button>
               );
@@ -679,7 +679,7 @@ export function AntTrailTeam() {
                   className={`inline-flex min-h-[44px] items-center rounded-full border px-3.5 py-1.5 font-mono text-xs font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E88B2E] ${
                     isSelected
                       ? "border-[#FBF5E8] bg-[#FFCF7A] text-[#1B120A]"
-                      : "border-[#C59560]/30 bg-[#170F0A]/75 text-[#E8D7BE] hover:border-[#E88B2E]/60 hover:text-[#FBF5E8]"
+                      : "border-[#7CE5DB]/30 bg-[#0D1A21]/80 text-[#D7EAE8] hover:border-[#E88B2E]/65 hover:text-[#FBF5E8]"
                   }`}
                 >
                   {member.handle}
@@ -688,7 +688,7 @@ export function AntTrailTeam() {
             })}
           </div>
 
-          {/* Centered Cream Bio Card (y: 24, scale: 0.96 -> 0, 1 in 0.28s easeOut) */}
+          {/* Centered Cream Bio Card */}
           <div className="mt-7 flex min-h-[16px] justify-center">
             <AnimatePresence mode="wait">
               {selectedMember && (
