@@ -67,6 +67,28 @@ body {
   background-position: 0 0, 11px 17px;
 }
 
+/* Faint product-studio blueprint grid for SkyBackdrop */
+.studio-blueprint-grid {
+  background-image:
+    linear-gradient(rgba(124, 229, 219, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 229, 219, 0.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 18%,
+    black 62%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 18%,
+    black 62%,
+    transparent 100%
+  );
+}
+
 /* CRT Terminal Shader-Inspired Effects */
 .crt-shell {
   background: linear-gradient(

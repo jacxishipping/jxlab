@@ -226,9 +226,9 @@ export function SolutionModal({
 
               <Link
                 href={`/register?track=${encodeURIComponent(solution.slug)}`}
-                className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-full bg-[#E88B2E] px-5 py-2.5 text-sm font-semibold text-[#1B120A] transition hover:bg-[#D4761B] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1E1712] sm:w-auto"
+                className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-full bg-[#E88B2E] px-5 py-2.5 text-sm font-semibold text-[#1B120A] transition hover:bg-[#F29A42] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1E1712] sm:w-auto"
               >
-                Scope this build
+                Start this build
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
