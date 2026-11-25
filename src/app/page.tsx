@@ -1,5 +1,6 @@
 import React from "react";
 import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
+import { IntroOverlay } from "@/components/IntroOverlay";
 import { SkyBackdrop } from "@/components/SkyBackdrop";
 import { Navbar } from "@/components/Navbar";
 import { SectionRail } from "@/components/SectionRail";
@@ -16,7 +17,8 @@ export default function HomePage() {
   return (
     <div className="relative min-h-screen w-full overflow-x-clip">
       <SmoothScrollProvider />
-      {/* Continuous Scroll-Driven Sky Backdrop (8-stop gradient, Bézier sun & moon, 50 stars, FBM clouds) */}
+      <IntroOverlay />
+      {/* Scroll-driven dusk sky — clouds, sun/moon arc, stars (HTN atmosphere) */}
       <SkyBackdrop />
 
       <Navbar />
@@ -24,20 +26,20 @@ export default function HomePage() {
       <SectionRail />
 
       <main className="relative z-10">
-        {/* Act 1: Dawn Sky Hero */}
+        {/* Act 1: Brand-first dawn hero + misty studio skyline */}
         <Hero />
 
-        {/* Act 2: Canopy Vignette & 85 chars/s Typewriter CRT Terminal */}
+        {/* Act 2: Canopy CRT typewriter + interactive CLI */}
         <TerminalAbout />
 
-        {/* Act 3: Sunset Studio Rail Choreography & Origin-Sprung Solutions */}
+        {/* Act 3: Agent/CI pipeline with dusk lamps, leaves, cream tracks */}
         <DepotSolutions />
 
-        {/* Act 4: Twilight Eagle Flyover, Feather-Drop Showcase, 70px/s Marquee & FAQ */}
+        {/* Act 4: Eagle/feather showcase, flagship builds, marquee + FAQ */}
         <BuildsMarquee />
         <FaqAccordion />
 
-        {/* Act 5: Interactive Wind Grass, Lissajous Fireflies, Tripod-Gait Ant Trail & Underground Burrow */}
+        {/* Act 5: Ant trail crew + underground deploy vault */}
         <AntTrailTeam />
         <UndergroundFooter />
       </main>

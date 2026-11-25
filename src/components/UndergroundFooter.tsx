@@ -138,7 +138,7 @@ function FiberConduitBay({ mirror = false }: { mirror?: boolean }) {
         <rect x="52" y="76" width="8" height="8" rx="2" fill="#E88B2E" />
       </svg>
 
-      {/* Two bidirectional path-tangent Nano-Agent Bots */}
+      {/* Path-tangent nano agent consoles */}
       {[bot1Ref, bot2Ref].map((ref, idx) => (
         <div
           key={idx}
@@ -150,28 +150,14 @@ function FiberConduitBay({ mirror = false }: { mirror?: boolean }) {
               <path
                 className="ant-leg-a"
                 d="M7 11L5 15M17 11L19 15"
-                stroke="#7CE5DB"
-                strokeWidth="1.2"
+                stroke="#70D6CE"
+                strokeWidth="1.1"
                 strokeLinecap="round"
               />
               <path
                 className="ant-leg-b"
                 d="M10 11L9 15M14 11L15 15"
-                stroke="#7CE5DB"
-                strokeWidth="1.2"
-                strokeLinecap="round"
-              />
-              <path
-                className="ant-antenna-l"
-                d="M21 6L25 3"
-                stroke="#F6B96D"
-                strokeWidth="1.1"
-                strokeLinecap="round"
-              />
-              <path
-                className="ant-antenna-r"
-                d="M21 10L25 13"
-                stroke="#7CE5DB"
+                stroke="#70D6CE"
                 strokeWidth="1.1"
                 strokeLinecap="round"
               />
@@ -180,12 +166,13 @@ function FiberConduitBay({ mirror = false }: { mirror?: boolean }) {
                 y="4"
                 width="15"
                 height="8"
-                rx="2.5"
-                fill="#162A33"
-                stroke="#7CE5DB"
-                strokeWidth="1.1"
+                rx="1.5"
+                fill="#0E1A20"
+                stroke="#70D6CE"
+                strokeWidth="1"
               />
-              <circle cx="15" cy="8" r="1.5" fill="#F6B96D" />
+              <rect x="8" y="6.5" width="5" height="2" rx="0.4" fill="#7CE5DB" />
+              <rect x="14" y="6.5" width="4" height="2" rx="0.4" fill="#F6B96D" />
             </g>
           </svg>
         </div>
@@ -233,13 +220,13 @@ export function UndergroundFooter() {
           <FiberConduitBay />
 
           {/* Central Rounded Compute Core Vault CTA */}
-          <div className="relative z-10 w-full max-w-2xl rounded-[2rem] border-2 border-[#7CE5DB]/40 bg-gradient-to-b from-[#162229] to-[#11151A] px-6 py-12 text-center shadow-[0_24px_64px_rgba(0,0,0,0.65),inset_0_1px_0_rgba(124,229,219,0.22)] sm:px-12 sm:py-16">
+          <div className="relative z-10 w-full max-w-2xl rounded-3xl border border-[#70D6CE]/35 bg-gradient-to-b from-[#121C22] to-[#0C1216] px-6 py-12 text-center shadow-[0_24px_64px_rgba(0,0,0,0.65),inset_0_1px_0_rgba(124,229,219,0.18)] sm:px-12 sm:py-16">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-[#7CE5DB]/65 to-transparent"
+              className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-[#70D6CE]/55 to-transparent"
             />
-            <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#7CE5DB]">
-              Compute Core // Launchpad
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#70D6CE]">
+              Deploy Core // Launchpad
             </p>
             <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-[#FBF5E8] sm:text-5xl">
               {undergroundCta.headline}

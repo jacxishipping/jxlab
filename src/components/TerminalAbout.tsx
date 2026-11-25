@@ -273,71 +273,41 @@ export function TerminalAbout() {
           "linear-gradient(180deg, #0B1E21 0%, rgba(11, 33, 38, 0.96) 62%, rgba(20, 17, 36, 0.45) 90%, rgba(20, 17, 36, 0) 100%)",
       }}
     >
-      {/* Overhead PCB Circuit Traces & Logic Bus Framing (lifts up on scroll exit) */}
+      {/* Overhead leafy canopy framing (HTN atmosphere + agent lab) */}
       <motion.div
         style={{ y: foliageY, opacity: foliageOpacity }}
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 flex justify-between"
       >
-        <svg viewBox="0 0 340 200" className="h-36 w-56 sm:h-48 sm:w-84" fill="none">
+        <svg viewBox="0 0 320 200" className="h-40 w-56 drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)] sm:h-56 sm:w-96" fill="none">
           <path
-            d="M0 24H150L188 62H286M0 64H96L134 102H214M0 112H62L92 142H146"
-            stroke="#70D6CE"
-            strokeOpacity="0.32"
-            strokeWidth="2"
+            d="M0 0H280C226 36 172 64 118 102C76 132 36 156 0 184V0Z"
+            fill="#0A221F"
           />
-          <path
-            d="M44 0V46L78 80H168"
-            stroke="#F6B96D"
-            strokeOpacity="0.32"
-            strokeWidth="1.8"
-          />
-          <circle cx="286" cy="62" r="4.5" fill="#7CE5DB" fillOpacity="0.65" />
-          <circle cx="214" cy="102" r="4" fill="#F6B96D" fillOpacity="0.7" />
-          <circle cx="146" cy="142" r="3.5" fill="#7CE5DB" fillOpacity="0.6" />
-          <rect
-            x="166"
-            y="72"
-            width="16"
-            height="16"
-            rx="3"
-            fill="#0B272C"
-            stroke="#F6B96D"
-            strokeOpacity="0.55"
-            strokeWidth="1.5"
-          />
+          <ellipse cx="165" cy="48" rx="42" ry="16" transform="rotate(-18 165 48)" fill="#1F4F3C" />
+          <ellipse cx="118" cy="70" rx="36" ry="14" transform="rotate(-12 118 70)" fill="#2A6350" />
+          <ellipse cx="96" cy="96" rx="34" ry="13" transform="rotate(-24 96 96)" fill="#245A48" />
+          <ellipse cx="48" cy="140" rx="28" ry="12" transform="rotate(-28 48 140)" fill="#1A4036" />
+          <ellipse cx="188" cy="28" rx="22" ry="9" transform="rotate(-8 188 28)" fill="#357A5E" fillOpacity="0.85" />
+          <circle cx="118" cy="72" r="2.5" fill="#F6B96D" fillOpacity="0.7" />
+          <circle cx="72" cy="118" r="2" fill="#7CE5DB" fillOpacity="0.55" />
         </svg>
         <svg
-          viewBox="0 0 340 200"
-          className="h-36 w-56 -scale-x-100 sm:h-48 sm:w-84"
+          viewBox="0 0 320 200"
+          className="h-40 w-56 -scale-x-100 drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)] sm:h-56 sm:w-96"
           fill="none"
         >
           <path
-            d="M0 24H150L188 62H286M0 64H96L134 102H214M0 112H62L92 142H146"
-            stroke="#70D6CE"
-            strokeOpacity="0.32"
-            strokeWidth="2"
+            d="M0 0H280C226 36 172 64 118 102C76 132 36 156 0 184V0Z"
+            fill="#0A221F"
           />
-          <path
-            d="M44 0V46L78 80H168"
-            stroke="#F6B96D"
-            strokeOpacity="0.32"
-            strokeWidth="1.8"
-          />
-          <circle cx="286" cy="62" r="4.5" fill="#7CE5DB" fillOpacity="0.65" />
-          <circle cx="214" cy="102" r="4" fill="#F6B96D" fillOpacity="0.7" />
-          <circle cx="146" cy="142" r="3.5" fill="#7CE5DB" fillOpacity="0.6" />
-          <rect
-            x="166"
-            y="72"
-            width="16"
-            height="16"
-            rx="3"
-            fill="#0B272C"
-            stroke="#F6B96D"
-            strokeOpacity="0.55"
-            strokeWidth="1.5"
-          />
+          <ellipse cx="165" cy="48" rx="42" ry="16" transform="rotate(-18 165 48)" fill="#1F4F3C" />
+          <ellipse cx="118" cy="70" rx="36" ry="14" transform="rotate(-12 118 70)" fill="#2A6350" />
+          <ellipse cx="96" cy="96" rx="34" ry="13" transform="rotate(-24 96 96)" fill="#245A48" />
+          <ellipse cx="48" cy="140" rx="28" ry="12" transform="rotate(-28 48 140)" fill="#1A4036" />
+          <ellipse cx="188" cy="28" rx="22" ry="9" transform="rotate(-8 188 28)" fill="#357A5E" fillOpacity="0.85" />
+          <circle cx="118" cy="72" r="2.5" fill="#F6B96D" fillOpacity="0.7" />
+          <circle cx="72" cy="118" r="2" fill="#7CE5DB" fillOpacity="0.55" />
         </svg>
       </motion.div>
 
@@ -352,19 +322,15 @@ export function TerminalAbout() {
           data-testid="crt-tv"
           className="crt-shell relative overflow-hidden rounded-[1.5rem] backdrop-blur-md"
         >
-          {/* Scrolling CRT Scanlines & RGB Aperture Grille */}
+          {/* CRT scanlines, roll bar & curved glass vignette */}
           <div
             aria-hidden="true"
             className="crt-scanlines pointer-events-none absolute inset-0 z-10 opacity-75"
           />
-
-          {/* Slow Rolling CRT Brightness Bar */}
           <div
             aria-hidden="true"
             className="crt-roll-bar pointer-events-none absolute inset-x-0 top-0 z-10 h-28"
           />
-
-          {/* Curved CRT Glass Reflection Sheen & Edge Vignette */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 z-10 rounded-[1.5rem]"
@@ -374,7 +340,7 @@ export function TerminalAbout() {
             }}
           />
 
-          {/* Terminal Top Chrome */}
+          {/* Terminal chrome */}
           <div className="relative z-20 flex flex-wrap items-center justify-between gap-2 border-b border-[#70D6CE]/20 bg-[#06181C]/90 px-4 py-3 sm:px-6">
             <div className="flex items-center gap-2">
               <span className="h-3 w-3 rounded-full bg-[#E06C5A]" />
@@ -538,8 +504,12 @@ export function TerminalAbout() {
               </div>
             </div>
 
-            {/* Right Synchronized Row-by-Row Amber ASCII Crest */}
-            <div className="flex min-h-[250px] items-center justify-center rounded-xl border border-[#F6B96D]/22 bg-[#051316]/80 px-3 py-5 sm:min-h-[280px] sm:p-6">
+            {/* Agent core schematic panel */}
+            <div className="relative flex min-h-[250px] flex-col justify-center rounded-xl border border-[#70D6CE]/22 bg-[#071418]/85 px-3 py-5 sm:min-h-[280px] sm:p-6">
+              <div className="mb-3 flex items-center justify-between font-mono text-[10px] tracking-wider text-[#70D6CE]/75">
+                <span>AGENT CORE // SCHEMATIC</span>
+                <span className="text-[#F6B96D]/80">v1.0</span>
+              </div>
               <pre
                 aria-label="JXLab ASCII emblem"
                 className="crt-phosphor-amber select-none overflow-hidden whitespace-pre font-mono text-[9.5px] leading-[1.2] text-[#F6B96D] sm:text-xs md:text-[13px]"
