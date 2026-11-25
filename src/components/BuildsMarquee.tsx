@@ -6,55 +6,53 @@ import { motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Github, Lock, Sparkles, TrendingUp } from "lucide-react";
 import { jxlabConfig } from "@/data/jxlabConfig";
 
-// Autonomous AI Agent Delivery Drone replacing the soaring eagle
-function AgentDroneSilhouette() {
+// Linear deploy/ship packet flyover (studio language)
+function DeployPacketSilhouette() {
   return (
     <svg
-      viewBox="0 0 180 76"
+      viewBox="0 0 160 48"
       fill="none"
-      className="h-14 w-32 drop-shadow-[0_10px_24px_rgba(0,0,0,0.55)] sm:h-20 sm:w-44"
+      className="h-10 w-28 drop-shadow-[0_8px_18px_rgba(0,0,0,0.45)] sm:h-12 sm:w-36"
       aria-hidden="true"
     >
-      {/* Rotor glow arcs */}
-      <ellipse cx="32" cy="22" rx="22" ry="4" fill="#7CE5DB" fillOpacity="0.45" />
-      <ellipse cx="148" cy="22" rx="22" ry="4" fill="#7CE5DB" fillOpacity="0.45" />
-      {/* Carbon-fiber wing arms */}
       <path
-        d="M28 24H152L134 40H46L28 24Z"
-        fill="#161426"
-        stroke="#7CE5DB"
-        strokeOpacity="0.7"
-        strokeWidth="1.6"
+        d="M8 24H118"
+        stroke="#70D6CE"
+        strokeOpacity="0.55"
+        strokeWidth="2"
+        strokeDasharray="4 5"
       />
-      {/* Central AI agent core chassis */}
       <rect
-        x="66"
-        y="26"
-        width="48"
+        x="48"
+        y="12"
+        width="64"
         height="24"
-        rx="7"
-        fill="#1E1729"
-        stroke="#F6B96D"
-        strokeWidth="1.6"
+        rx="4"
+        fill="#0E181E"
+        stroke="#E88B2E"
+        strokeWidth="1.5"
       />
-      {/* Glowing optical sensor visor */}
-      <rect x="77" y="34" width="26" height="7" rx="3.5" fill="#0B1E24" />
-      <circle cx="85" cy="37.5" r="2.2" fill="#7CE5DB" />
-      <circle cx="95" cy="37.5" r="2.2" fill="#F6B96D" />
-      {/* Payload deploy bay glow */}
-      <path d="M80 52L90 62L100 52Z" fill="#E88B2E" fillOpacity="0.85" />
+      <rect x="56" y="18" width="28" height="3" rx="1" fill="#7CE5DB" fillOpacity="0.7" />
+      <rect x="56" y="25" width="40" height="3" rx="1" fill="#F6B96D" fillOpacity="0.55" />
+      <path
+        d="M112 16L132 24L112 32Z"
+        fill="#E88B2E"
+        fillOpacity="0.9"
+      />
+      <circle cx="20" cy="24" r="3" fill="#7CE5DB" fillOpacity="0.8" />
+      <circle cx="32" cy="24" r="2" fill="#F6B96D" fillOpacity="0.7" />
     </svg>
   );
 }
 
-// Spiraling glowing Code Artifact Shard replacing the dropping feather
-function CodeShardGlyph() {
+// Compact build chip that settles onto showcase cards
+function BuildChipGlyph({ label = "build" }: { label?: string }) {
   return (
     <div
       aria-hidden="true"
-      className="inline-flex items-center justify-center rounded-md border border-[#7CE5DB]/75 bg-[#12252C]/95 px-2 py-1 font-mono text-[10px] font-bold text-[#F6B96D] shadow-[0_0_16px_rgba(124,229,219,0.55)]"
+      className="inline-flex items-center justify-center rounded-md border border-[#70D6CE]/55 bg-[#0E181E]/95 px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-[#F6B96D] shadow-[0_0_12px_rgba(112,214,206,0.35)]"
     >
-      &lt;/&gt;
+      {label}
     </div>
   );
 }
@@ -215,7 +213,7 @@ export function BuildsMarquee() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mx-auto max-w-2xl text-center"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#FBF5E8]/20 bg-[#1B1F47]/55 px-3.5 py-1 font-mono text-xs font-semibold tracking-widest text-[#F6B96D] backdrop-blur-sm">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#FBF5E8]/20 bg-[#121820]/55 px-3.5 py-1 font-mono text-xs font-semibold tracking-widest text-[#F6B96D] backdrop-blur-sm">
             <Sparkles className="h-3.5 w-3.5" />
             {buildsSection.eyebrow}
           </span>
@@ -227,16 +225,16 @@ export function BuildsMarquee() {
           </p>
         </motion.div>
 
-        {/* Eagle Flyover & Feather-Drop Showcase Stage */}
+        {/* Deploy packet flyover + build-chip settle */}
         <div ref={stageRef} className="relative mt-14">
           {triggerFlyover && (
             <motion.div
               aria-hidden="true"
-              initial={{ x: "-24vw", y: "0vh", rotate: 2, opacity: 0.95 }}
+              initial={{ x: "-24vw", y: "0vh", rotate: 0, opacity: 0.95 }}
               animate={{
                 x: "124vw",
-                y: ["0vh", "-3.2vh", "0vh"],
-                rotate: [2, -4, 2],
+                y: ["0vh", "-2vh", "0vh"],
+                rotate: [0, -2, 0],
                 opacity: [0.95, 1, 0],
               }}
               transition={{
@@ -247,7 +245,7 @@ export function BuildsMarquee() {
               }}
               className="pointer-events-none fixed left-0 top-[22vh] z-40"
             >
-              <AgentDroneSilhouette />
+              <DeployPacketSilhouette />
             </motion.div>
           )}
 
@@ -288,7 +286,15 @@ export function BuildsMarquee() {
                       }}
                       className="pointer-events-none absolute left-1/2 top-0 z-20 -translate-x-1/2"
                     >
-                      <CodeShardGlyph />
+                      <BuildChipGlyph
+                        label={
+                          build.id === "bidnix"
+                            ? "deploy"
+                            : build.id === "jxui-react"
+                              ? "ui"
+                              : "build"
+                        }
+                      />
                     </motion.div>
                   )}
 

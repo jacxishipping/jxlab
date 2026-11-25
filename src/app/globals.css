@@ -89,19 +89,19 @@ body {
   );
 }
 
-/* CRT Terminal Shader-Inspired Effects */
+/* Studio console shell (restrained teal system glow — not arcade CRT) */
 .crt-shell {
   background: linear-gradient(
     165deg,
-    rgba(9, 36, 41, 0.92) 0%,
-    rgba(6, 22, 27, 0.96) 100%
+    rgba(10, 28, 34, 0.94) 0%,
+    rgba(8, 18, 24, 0.97) 100%
   );
-  border: 1px solid rgba(112, 214, 206, 0.3);
+  border: 1px solid rgba(112, 214, 206, 0.28);
   box-shadow:
-    0 28px 80px -20px rgba(0, 0, 0, 0.8),
-    0 0 54px -10px rgba(56, 178, 172, 0.24),
-    inset 0 0 60px rgba(0, 0, 0, 0.55),
-    inset 0 1px 0 rgba(168, 240, 234, 0.2);
+    0 24px 64px -24px rgba(0, 0, 0, 0.72),
+    0 0 32px -12px rgba(56, 178, 172, 0.16),
+    inset 0 0 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(168, 240, 234, 0.14);
 }
 
 @keyframes crtScanDrift {
@@ -122,58 +122,34 @@ body {
   }
 }
 
-@keyframes crtFlicker {
-  0%,
-  100% {
-    opacity: 0.99;
-  }
-  50% {
-    opacity: 0.962;
-  }
-}
-
 .crt-scanlines {
-  background-image:
-    repeating-linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.26) 0px,
-      rgba(0, 0, 0, 0.26) 1px,
-      transparent 1px,
-      transparent 4px
-    ),
-    repeating-linear-gradient(
-      to right,
-      rgba(255, 80, 80, 0.03) 0px,
-      rgba(80, 255, 160, 0.03) 1px,
-      rgba(80, 160, 255, 0.03) 2px,
-      transparent 3px
-    );
-  animation: crtScanDrift 1.6s linear infinite;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 5px
+  );
+  animation: crtScanDrift 3.2s linear infinite;
+  opacity: 0.35;
 }
 
 .crt-roll-bar {
   background: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(130, 240, 230, 0.055) 50%,
+    rgba(130, 240, 230, 0.035) 50%,
     transparent 100%
   );
-  animation: crtRollBar 14s linear infinite;
+  animation: crtRollBar 18s linear infinite;
 }
 
 .crt-phosphor {
-  text-shadow:
-    0 0 10px rgba(124, 229, 219, 0.42),
-    -0.6px 0 0 rgba(255, 95, 95, 0.28),
-    0.6px 0 0 rgba(95, 220, 255, 0.28);
-  animation: crtFlicker 0.785s ease-in-out infinite;
+  text-shadow: 0 0 8px rgba(124, 229, 219, 0.22);
 }
 
 .crt-phosphor-amber {
-  text-shadow:
-    0 0 14px rgba(246, 185, 109, 0.52),
-    -0.8px 0 0 rgba(255, 110, 70, 0.35),
-    0.8px 0 0 rgba(120, 225, 255, 0.25);
+  text-shadow: 0 0 10px rgba(246, 185, 109, 0.28);
 }
 
 /* Continuous 120s Cloud Strip Drift (matches hackthenest.tech) */
@@ -409,7 +385,6 @@ body {
   .animate-cursor-420,
   .crt-scanlines,
   .crt-roll-bar,
-  .crt-phosphor,
   .animate-lamp-breathe,
   .animate-leaf-skitter,
   .marquee-track,

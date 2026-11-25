@@ -16,7 +16,7 @@ export default function HomePage() {
   return (
     <div className="relative min-h-screen w-full overflow-x-clip">
       <SmoothScrollProvider />
-      {/* Continuous Scroll-Driven Sky Backdrop (8-stop gradient, Bézier sun & moon, 50 stars, FBM clouds) */}
+      {/* Scroll-driven studio sky (haze, key light, blueprint grid) */}
       <SkyBackdrop />
 
       <Navbar />
@@ -24,20 +24,20 @@ export default function HomePage() {
       <SectionRail />
 
       <main className="relative z-10">
-        {/* Act 1: Dawn Sky Hero */}
+        {/* Act 1: Studio sky hero + architecture horizon */}
         <Hero />
 
-        {/* Act 2: Canopy Vignette & 85 chars/s Typewriter CRT Terminal */}
+        {/* Act 2: Studio console typewriter + interactive CLI */}
         <TerminalAbout />
 
-        {/* Act 3: Sunset Studio Rail Choreography & Origin-Sprung Solutions */}
+        {/* Act 3: Scroll-scrubbed agent/CI pipeline + solution tracks */}
         <DepotSolutions />
 
-        {/* Act 4: Twilight Eagle Flyover, Feather-Drop Showcase, 70px/s Marquee & FAQ */}
+        {/* Act 4: Deploy packet flyover, flagship builds, tech marquee + FAQ */}
         <BuildsMarquee />
         <FaqAccordion />
 
-        {/* Act 5: Interactive Wind Grass, Lissajous Fireflies, Tripod-Gait Ant Trail & Underground Burrow */}
+        {/* Act 5: Neural field, agent crew bus, deploy-core vault */}
         <AntTrailTeam />
         <UndergroundFooter />
       </main>

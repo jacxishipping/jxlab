@@ -270,10 +270,10 @@ export function TerminalAbout() {
       className="relative scroll-mt-20 overflow-hidden px-4 pb-28 pt-14 sm:px-6 sm:pb-36 sm:pt-20"
       style={{
         background:
-          "linear-gradient(180deg, #0B1E21 0%, rgba(11, 33, 38, 0.96) 62%, rgba(20, 17, 36, 0.45) 90%, rgba(20, 17, 36, 0) 100%)",
+          "linear-gradient(180deg, #0B1E21 0%, rgba(12, 26, 34, 0.96) 55%, rgba(22, 20, 36, 0.4) 88%, rgba(22, 20, 36, 0) 100%)",
       }}
     >
-      {/* Overhead PCB Circuit Traces & Logic Bus Framing (lifts up on scroll exit) */}
+      {/* Studio blueprint / rack-frame corners */}
       <motion.div
         style={{ y: foliageY, opacity: foliageOpacity }}
         aria-hidden="true"
@@ -281,31 +281,34 @@ export function TerminalAbout() {
       >
         <svg viewBox="0 0 340 200" className="h-36 w-56 sm:h-48 sm:w-84" fill="none">
           <path
-            d="M0 24H150L188 62H286M0 64H96L134 102H214M0 112H62L92 142H146"
+            d="M0 20H120V48H176V20H220"
             stroke="#70D6CE"
-            strokeOpacity="0.32"
-            strokeWidth="2"
+            strokeOpacity="0.35"
+            strokeWidth="1.6"
           />
           <path
-            d="M44 0V46L78 80H168"
-            stroke="#F6B96D"
-            strokeOpacity="0.32"
-            strokeWidth="1.8"
+            d="M0 52H72V92H128M0 92H48"
+            stroke="#70D6CE"
+            strokeOpacity="0.28"
+            strokeWidth="1.6"
           />
-          <circle cx="286" cy="62" r="4.5" fill="#7CE5DB" fillOpacity="0.65" />
-          <circle cx="214" cy="102" r="4" fill="#F6B96D" fillOpacity="0.7" />
-          <circle cx="146" cy="142" r="3.5" fill="#7CE5DB" fillOpacity="0.6" />
+          <path d="M24 0V40H64" stroke="#F6B96D" strokeOpacity="0.35" strokeWidth="1.5" />
           <rect
-            x="166"
-            y="72"
-            width="16"
-            height="16"
+            x="148"
+            y="64"
+            width="44"
+            height="36"
             rx="3"
-            fill="#0B272C"
+            fill="#0B1E24"
             stroke="#F6B96D"
-            strokeOpacity="0.55"
-            strokeWidth="1.5"
+            strokeOpacity="0.45"
+            strokeWidth="1.4"
           />
+          <rect x="156" y="72" width="20" height="2.5" rx="1" fill="#7CE5DB" fillOpacity="0.55" />
+          <rect x="156" y="80" width="28" height="2.5" rx="1" fill="#F6B96D" fillOpacity="0.45" />
+          <rect x="156" y="88" width="14" height="2.5" rx="1" fill="#70D6CE" fillOpacity="0.4" />
+          <circle cx="220" cy="20" r="3" fill="#7CE5DB" fillOpacity="0.7" />
+          <circle cx="128" cy="92" r="3" fill="#F6B96D" fillOpacity="0.65" />
         </svg>
         <svg
           viewBox="0 0 340 200"
@@ -313,31 +316,34 @@ export function TerminalAbout() {
           fill="none"
         >
           <path
-            d="M0 24H150L188 62H286M0 64H96L134 102H214M0 112H62L92 142H146"
+            d="M0 20H120V48H176V20H220"
             stroke="#70D6CE"
-            strokeOpacity="0.32"
-            strokeWidth="2"
+            strokeOpacity="0.35"
+            strokeWidth="1.6"
           />
           <path
-            d="M44 0V46L78 80H168"
-            stroke="#F6B96D"
-            strokeOpacity="0.32"
-            strokeWidth="1.8"
+            d="M0 52H72V92H128M0 92H48"
+            stroke="#70D6CE"
+            strokeOpacity="0.28"
+            strokeWidth="1.6"
           />
-          <circle cx="286" cy="62" r="4.5" fill="#7CE5DB" fillOpacity="0.65" />
-          <circle cx="214" cy="102" r="4" fill="#F6B96D" fillOpacity="0.7" />
-          <circle cx="146" cy="142" r="3.5" fill="#7CE5DB" fillOpacity="0.6" />
+          <path d="M24 0V40H64" stroke="#F6B96D" strokeOpacity="0.35" strokeWidth="1.5" />
           <rect
-            x="166"
-            y="72"
-            width="16"
-            height="16"
+            x="148"
+            y="64"
+            width="44"
+            height="36"
             rx="3"
-            fill="#0B272C"
+            fill="#0B1E24"
             stroke="#F6B96D"
-            strokeOpacity="0.55"
-            strokeWidth="1.5"
+            strokeOpacity="0.45"
+            strokeWidth="1.4"
           />
+          <rect x="156" y="72" width="20" height="2.5" rx="1" fill="#7CE5DB" fillOpacity="0.55" />
+          <rect x="156" y="80" width="28" height="2.5" rx="1" fill="#F6B96D" fillOpacity="0.45" />
+          <rect x="156" y="88" width="14" height="2.5" rx="1" fill="#70D6CE" fillOpacity="0.4" />
+          <circle cx="220" cy="20" r="3" fill="#7CE5DB" fillOpacity="0.7" />
+          <circle cx="128" cy="92" r="3" fill="#F6B96D" fillOpacity="0.65" />
         </svg>
       </motion.div>
 
@@ -352,34 +358,30 @@ export function TerminalAbout() {
           data-testid="crt-tv"
           className="crt-shell relative overflow-hidden rounded-[1.5rem] backdrop-blur-md"
         >
-          {/* Scrolling CRT Scanlines & RGB Aperture Grille */}
+          {/* Subtle studio scan + sheen */}
           <div
             aria-hidden="true"
-            className="crt-scanlines pointer-events-none absolute inset-0 z-10 opacity-75"
+            className="crt-scanlines pointer-events-none absolute inset-0 z-10"
           />
-
-          {/* Slow Rolling CRT Brightness Bar */}
           <div
             aria-hidden="true"
-            className="crt-roll-bar pointer-events-none absolute inset-x-0 top-0 z-10 h-28"
+            className="crt-roll-bar pointer-events-none absolute inset-x-0 top-0 z-10 h-24"
           />
-
-          {/* Curved CRT Glass Reflection Sheen & Edge Vignette */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 z-10 rounded-[1.5rem]"
             style={{
               background:
-                "radial-gradient(ellipse at 30% 15%, rgba(255,255,255,0.065) 0%, transparent 45%), radial-gradient(ellipse at center, transparent 58%, rgba(2,10,12,0.52) 100%)",
+                "linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 18%), radial-gradient(ellipse at center, transparent 62%, rgba(2,10,12,0.4) 100%)",
             }}
           />
 
-          {/* Terminal Top Chrome */}
+          {/* Console chrome */}
           <div className="relative z-20 flex flex-wrap items-center justify-between gap-2 border-b border-[#70D6CE]/20 bg-[#06181C]/90 px-4 py-3 sm:px-6">
             <div className="flex items-center gap-2">
-              <span className="h-3 w-3 rounded-full bg-[#E06C5A]" />
-              <span className="h-3 w-3 rounded-full bg-[#E8A948]" />
-              <span className="h-3 w-3 rounded-full bg-[#5BBF99]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#E06C5A]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#E8A948]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#5BBF99]" />
             </div>
             <div className="font-mono text-[11px] tracking-wider text-[#9BE2DC] sm:text-xs">
               <span className="font-semibold text-[#F6B96D]">{terminal.version}</span>
@@ -538,8 +540,12 @@ export function TerminalAbout() {
               </div>
             </div>
 
-            {/* Right Synchronized Row-by-Row Amber ASCII Crest */}
-            <div className="flex min-h-[250px] items-center justify-center rounded-xl border border-[#F6B96D]/22 bg-[#051316]/80 px-3 py-5 sm:min-h-[280px] sm:p-6">
+            {/* Agent core schematic panel */}
+            <div className="relative flex min-h-[250px] flex-col justify-center rounded-xl border border-[#70D6CE]/22 bg-[#071418]/85 px-3 py-5 sm:min-h-[280px] sm:p-6">
+              <div className="mb-3 flex items-center justify-between font-mono text-[10px] tracking-wider text-[#70D6CE]/75">
+                <span>AGENT CORE // SCHEMATIC</span>
+                <span className="text-[#F6B96D]/80">v1.0</span>
+              </div>
               <pre
                 aria-label="JXLab ASCII emblem"
                 className="crt-phosphor-amber select-none overflow-hidden whitespace-pre font-mono text-[9.5px] leading-[1.2] text-[#F6B96D] sm:text-xs md:text-[13px]"

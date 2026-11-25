@@ -6,12 +6,11 @@ import { ArrowUpRight, Cpu } from "lucide-react";
 import { jxlabConfig, type SolutionItem } from "@/data/jxlabConfig";
 import { SolutionModal, type ModalOrigin } from "./SolutionModal";
 
-// Drifting glowing code-token particles replacing autumn leaves
-const CODE_TOKENS = [
-  { top: "16%", delay: "0s", duration: "11s", symbol: "</>", color: "#F6B96D" },
-  { top: "48%", delay: "3.1s", duration: "13s", symbol: "{ }", color: "#7CE5DB" },
-  { top: "74%", delay: "6.2s", duration: "10.5s", symbol: "=>", color: "#FFCF7A" },
-  { top: "32%", delay: "8.4s", duration: "12.8s", symbol: "λ()", color: "#9CE8E1" },
+// Sparse data-packet dots (studio, not leaf confetti)
+const DATA_PACKETS = [
+  { top: "18%", delay: "0s", duration: "14s", color: "#7CE5DB" },
+  { top: "42%", delay: "4s", duration: "16s", color: "#F6B96D" },
+  { top: "68%", delay: "7.5s", duration: "15s", color: "#70D6CE" },
 ];
 
 export function DepotSolutions() {
@@ -124,25 +123,23 @@ export function DepotSolutions() {
       ref={sectionRef}
       className="relative scroll-mt-20 overflow-hidden bg-transparent px-4 py-24 sm:px-6 sm:py-32"
     >
-      {/* Drifting Glowing Code-Token Particles */}
+      {/* Sparse drifting data packets */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 overflow-hidden"
       >
-        {CODE_TOKENS.map((tok, idx) => (
+        {DATA_PACKETS.map((pkt, idx) => (
           <span
             key={idx}
-            className="animate-leaf-skitter absolute -left-10 font-mono text-xs font-bold opacity-80"
+            className="animate-leaf-skitter absolute -left-6 h-1.5 w-1.5 rounded-full opacity-70"
             style={{
-              top: tok.top,
-              color: tok.color,
-              animationDelay: tok.delay,
-              animationDuration: tok.duration,
-              textShadow: `0 0 10px ${tok.color}`,
+              top: pkt.top,
+              backgroundColor: pkt.color,
+              boxShadow: `0 0 8px ${pkt.color}`,
+              animationDelay: pkt.delay,
+              animationDuration: pkt.duration,
             }}
-          >
-            {tok.symbol}
-          </span>
+          />
         ))}
       </div>
 
@@ -155,11 +152,11 @@ export function DepotSolutions() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mx-auto max-w-2xl text-center"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#FBF5E8]/25 bg-[#2A1734]/50 px-3.5 py-1 font-mono text-xs font-semibold tracking-widest text-[#F6B96D] backdrop-blur-sm">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#FBF5E8]/25 bg-[#141820]/55 px-3.5 py-1 font-mono text-xs font-semibold tracking-widest text-[#F6B96D] backdrop-blur-sm">
             <Cpu className="h-3.5 w-3.5" />
             {solutionsSection.eyebrow}
           </span>
-          <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-[#FBF5E8] drop-shadow-[0_6px_18px_rgba(20,8,24,0.38)] sm:text-5xl">
+          <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-[#FBF5E8] drop-shadow-[0_6px_18px_rgba(12,10,20,0.4)] sm:text-5xl">
             {solutionsSection.headline}
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[#FBF5E8]/90 sm:text-lg">
@@ -167,207 +164,158 @@ export function DepotSolutions() {
           </p>
         </motion.div>
 
-        {/* Scroll-Driven Autonomous Agent CI/CD Pipeline & Policy Gate Bus */}
+        {/* Clean CI / agent pipeline diagram */}
         <div
           aria-hidden="true"
-          className="relative mt-12 overflow-hidden rounded-2xl border border-[#FBF5E8]/18 bg-[#1E1124]/60 px-4 pb-5 pt-10 shadow-[0_20px_50px_rgba(12,6,18,0.45)] backdrop-blur-sm sm:px-8"
+          className="relative mt-12 overflow-hidden rounded-2xl border border-[#70D6CE]/18 bg-[#0E161C]/72 px-4 pb-5 pt-10 shadow-[0_20px_50px_rgba(6,10,16,0.5)] backdrop-blur-sm sm:px-8"
         >
-          {/* Breathing Telemetry Beacon Towers */}
+          {/* Status beacons */}
           <div className="pointer-events-none absolute left-8 top-4 flex flex-col items-center">
-            <div className="animate-lamp-breathe h-10 w-10 rounded-full bg-[#7CE5DB]/40 blur-md" />
-            <div className="-mt-7 h-2.5 w-2.5 rounded-full bg-[#B9F7F1] shadow-[0_0_16px_#7CE5DB]" />
-            <div className="h-16 w-0.5 bg-[#46304A]" />
+            <div className="animate-lamp-breathe h-5 w-5 rounded-full bg-[#7CE5DB]/25 blur-sm" />
+            <div className="-mt-3.5 h-2 w-2 rounded-full bg-[#7CE5DB] shadow-[0_0_10px_#7CE5DB]" />
+            <div className="h-12 w-px bg-[#2A3E48]" />
           </div>
           <div className="pointer-events-none absolute right-8 top-4 flex flex-col items-center">
             <div
-              className="animate-lamp-breathe h-10 w-10 rounded-full bg-[#F6B96D]/45 blur-md"
+              className="animate-lamp-breathe h-5 w-5 rounded-full bg-[#F6B96D]/25 blur-sm"
               style={{ animationDelay: "2.4s" }}
             />
-            <div className="-mt-7 h-2.5 w-2.5 rounded-full bg-[#FFF0CE] shadow-[0_0_16px_#F6B96D]" />
-            <div className="h-16 w-0.5 bg-[#46304A]" />
+            <div className="-mt-3.5 h-2 w-2 rounded-full bg-[#F6B96D] shadow-[0_0_10px_#F6B96D]" />
+            <div className="h-12 w-px bg-[#2A3E48]" />
           </div>
 
-          {/* Silhouette Server Racks & IDE Code Windows Lighting Up with Scroll */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-7 flex items-end justify-between px-10 opacity-80">
-            {/* Left IDE + Compute Rack */}
+          {/* IDE / rack panes (hero language) */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-7 flex items-end justify-between px-8 opacity-85 sm:px-12">
             <div className="flex items-end gap-2">
-              <div className="h-16 w-20 rounded-t-md border border-[#70D6CE]/20 bg-[#150E1C] p-2">
-                <motion.div
-                  style={{ opacity: clusterGlowOpacity }}
-                  className="space-y-1.5"
-                >
+              <div className="h-14 w-20 rounded-md border border-[#70D6CE]/22 bg-[#0A1418] p-2">
+                <motion.div style={{ opacity: clusterGlowOpacity }} className="space-y-1.5">
                   <span className="block h-1.5 w-10 rounded-full bg-[#7CE5DB]" />
                   <span className="block h-1.5 w-14 rounded-full bg-[#F6B96D]" />
-                  <span className="block h-1.5 w-8 rounded-full bg-[#E88B2E]/80" />
-                  <span className="block h-1.5 w-12 rounded-full bg-[#7CE5DB]/75" />
+                  <span className="block h-1.5 w-8 rounded-full bg-[#E88B2E]/75" />
                 </motion.div>
               </div>
-              <div className="hidden h-12 w-12 rounded-t-md border border-[#F6B96D]/20 bg-[#1A1022] p-1.5 sm:block">
-                <motion.div
-                  style={{ opacity: clusterGlowOpacity }}
-                  className="space-y-1"
-                >
+              <div className="hidden h-11 w-12 rounded-md border border-[#F6B96D]/2 bg-[#0C161A] p-1.5 sm:block">
+                <motion.div style={{ opacity: clusterGlowOpacity }} className="space-y-1">
                   <div className="flex gap-1">
                     <span className="h-1.5 w-1.5 rounded-full bg-[#5BBF99]" />
-                    <span className="h-1.5 flex-1 rounded-full bg-[#F6B96D]/75" />
+                    <span className="h-1.5 flex-1 rounded-full bg-[#F6B96D]/7" />
                   </div>
                   <div className="flex gap-1">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#5BBF99]" />
-                    <span className="h-1.5 flex-1 rounded-full bg-[#7CE5DB]/70" />
-                  </div>
-                  <div className="flex gap-1">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#E88B2E]" />
-                    <span className="h-1.5 flex-1 rounded-full bg-[#F6B96D]/60" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#7CE5DB]" />
+                    <span className="h-1.5 flex-1 rounded-full bg-[#70D6CE]/6" />
                   </div>
                 </motion.div>
               </div>
             </div>
-
-            {/* Right GPU Inference Cluster */}
             <div className="flex items-end gap-2">
-              <div className="hidden h-12 w-14 rounded-t-md border border-[#70D6CE]/20 bg-[#1A1022] p-1.5 sm:block">
-                <motion.div
-                  style={{ opacity: clusterGlowOpacity }}
-                  className="space-y-1"
-                >
+              <div className="hidden h-11 w-14 rounded-md border border-[#70D6CE]/2 bg-[#0C161A] p-1.5 sm:block">
+                <motion.div style={{ opacity: clusterGlowOpacity }} className="space-y-1">
                   <span className="block h-1.5 w-9 rounded-full bg-[#7CE5DB]" />
                   <span className="block h-1.5 w-7 rounded-full bg-[#F6B96D]" />
-                  <span className="block h-1.5 w-10 rounded-full bg-[#5BBF99]" />
                 </motion.div>
               </div>
-              <div className="h-16 w-24 rounded-t-md border border-[#F6B96D]/25 bg-[#150E1C] p-2">
-                <motion.div
-                  style={{ opacity: clusterGlowOpacity }}
-                  className="space-y-1.5"
-                >
-                  <div className="flex items-center justify-between gap-1">
+              <div className="h-14 w-24 rounded-md border border-[#F6B96D]/25 bg-[#0A1418] p-2">
+                <motion.div style={{ opacity: clusterGlowOpacity }} className="space-y-1.5">
+                  <div className="flex gap-1">
                     <span className="h-1.5 w-2 rounded-full bg-[#5BBF99]" />
-                    <span className="h-1.5 flex-1 rounded-full bg-[#F6B96D]/85" />
+                    <span className="h-1.5 flex-1 rounded-full bg-[#F6B96D]/8" />
                   </div>
-                  <div className="flex items-center justify-between gap-1">
+                  <div className="flex gap-1">
                     <span className="h-1.5 w-2 rounded-full bg-[#7CE5DB]" />
-                    <span className="h-1.5 flex-1 rounded-full bg-[#7CE5DB]/75" />
+                    <span className="h-1.5 flex-1 rounded-full bg-[#70D6CE]/7" />
                   </div>
-                  <div className="flex items-center justify-between gap-1">
-                    <span className="h-1.5 w-2 rounded-full bg-[#5BBF99]" />
-                    <span className="h-1.5 flex-1 rounded-full bg-[#E88B2E]/80" />
-                  </div>
-                  <div className="flex items-center justify-between gap-1">
-                    <span className="h-1.5 w-2 rounded-full bg-[#F6B96D]" />
-                    <span className="h-1.5 flex-1 rounded-full bg-[#FBF5E8]/60" />
+                  <div className="flex gap-1">
+                    <span className="h-1.5 w-2 rounded-full bg-[#E88B2E]" />
+                    <span className="h-1.5 flex-1 rounded-full bg-[#FBF5E8]/5" />
                   </div>
                 </motion.div>
               </div>
             </div>
           </div>
 
-          {/* Animated Policy & Eval Gate Barriers */}
-          <div className="pointer-events-none relative z-20 flex h-20 items-end justify-between">
+          {/* Slim policy / eval barriers */}
+          <div className="pointer-events-none relative z-20 flex h-16 items-end justify-between">
             <div className="relative ml-2 sm:ml-6">
-              <div className="h-12 w-1.5 rounded-t bg-[#5A425E]" />
+              <div className="h-10 w-1 rounded-t bg-[#2E4450]" />
               <motion.div
-                style={{ rotate: leftGateRotate, transformOrigin: "3px 3px" }}
-                className="absolute left-0 top-2 h-1.5 w-20 rounded-full bg-gradient-to-r from-[#7CE5DB] via-[#FBF5E8] to-[#E88B2E] sm:w-28"
+                style={{ rotate: leftGateRotate, transformOrigin: "2px 2px" }}
+                className="absolute left-0 top-1.5 h-1 w-16 rounded-sm bg-gradient-to-r from-[#7CE5DB] to-[#E88B2E] sm:w-24"
               />
+              <span className="absolute -bottom-4 left-0 font-mono text-[8px] tracking-wider text-[#70D6CE]/7">
+                POLICY
+              </span>
             </div>
-
             <div className="relative mr-2 sm:mr-6">
-              <div className="h-12 w-1.5 rounded-t bg-[#5A425E]" />
+              <div className="h-10 w-1 rounded-t bg-[#2E4450]" />
               <motion.div
                 style={{
                   rotate: rightGateRotate,
-                  transformOrigin: "calc(100% - 3px) 3px",
+                  transformOrigin: "calc(100% - 2px) 2px",
                 }}
-                className="absolute right-0 top-2 h-1.5 w-20 rounded-full bg-gradient-to-l from-[#7CE5DB] via-[#FBF5E8] to-[#E88B2E] sm:w-28"
+                className="absolute right-0 top-1.5 h-1 w-16 rounded-sm bg-gradient-to-l from-[#7CE5DB] to-[#E88B2E] sm:w-24"
               />
+              <span className="absolute -bottom-4 right-0 font-mono text-[8px] tracking-wider text-[#F6B96D]/7">
+                EVAL
+              </span>
             </div>
           </div>
 
-          {/* Scroll-Scrubbed Multi-Agent Pipeline Convoy */}
+          {/* Scroll-scrubbed stage pods */}
           <motion.div
             style={{ x: convoyX }}
-            className="pointer-events-none relative z-10 -mt-14 flex items-end gap-1.5 will-change-transform"
+            className="pointer-events-none relative z-10 -mt-10 flex items-end gap-2 will-change-transform"
           >
-            {/* 3 Connected Autonomous Agent Stage Pods */}
             {["PLANNER", "CODER", "VERIFIER"].map((label) => (
               <div
                 key={label}
-                className="relative flex h-12 w-24 shrink-0 flex-col justify-between rounded-lg border border-[#7CE5DB]/40 bg-[#1B1328] px-2 py-1.5 shadow-md sm:w-28"
+                className="relative flex h-11 w-24 shrink-0 flex-col justify-between rounded-md border border-[#70D6CE]/35 bg-[#0C171D] px-2 py-1.5 sm:w-28"
               >
                 <div className="flex items-center justify-between gap-1">
-                  <span className="h-2 w-2 rounded-full bg-[#5BBF99] shadow-[0_0_8px_#5BBF99]" />
-                  <span className="font-mono text-[8px] font-bold tracking-wider text-[#FBF5E8]/90">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#5BBF99]" />
+                  <span className="font-mono text-[8px] font-bold tracking-wider text-[#FBF5E8]/9">
                     {label}
                   </span>
-                  <span className="font-mono text-[8px] text-[#7CE5DB]">&lt;/&gt;</span>
+                  <span className="font-mono text-[8px] text-[#70D6CE]">&lt;/&gt;</span>
                 </div>
-                <div className="h-1 w-full rounded-full bg-gradient-to-r from-[#7CE5DB]/70 to-[#E88B2E]/75" />
-                {/* Physically Rotating Drive Cogs */}
-                <div className="absolute -bottom-2 inset-x-3 flex justify-between">
+                <div className="h-0.5 w-full rounded-full bg-gradient-to-r from-[#7CE5DB]/65 to-[#E88B2E]/7" />
+                <div className="absolute -bottom-1.5 inset-x-4 flex justify-between">
                   {[0, 1].map((w) => (
                     <motion.span
                       key={w}
                       style={{ rotate: gearAngle }}
-                      className="flex h-4 w-4 items-center justify-center rounded-full border-2 border-[#7CE5DB] bg-[#100A18]"
-                    >
-                      <span className="h-2.5 w-0.5 bg-[#F6B96D]" />
-                    </motion.span>
+                      className="h-2.5 w-2.5 rounded-sm border border-[#70D6CE]/6 bg-[#0A1216]"
+                    />
                   ))}
                 </div>
               </div>
             ))}
 
-            {/* Lead Orchestrator Engine with Rising Token Bursts & Laser Scanner */}
-            <div className="relative h-14 w-36 shrink-0 rounded-xl border border-[#F6B96D]/60 bg-[#140D1E] px-2.5 py-2 shadow-lg">
-              {/* Telemetry Emitter & Rising Data Tokens */}
-              <div className="absolute -top-3 right-5 h-3.5 w-2.5 rounded-t-sm bg-[#3C2B48]">
+            <div className="relative h-12 w-36 shrink-0 rounded-md border border-[#E88B2E]/5 bg-[#12100E] px-2.5 py-1.5">
+              <div className="absolute -top-2 right-4 flex gap-1">
                 <motion.span
                   style={{ y: packetRise1 }}
-                  className="absolute -top-4 -left-3 font-mono text-[9px] font-bold text-[#7CE5DB]"
-                >
-                  01
-                </motion.span>
+                  className="h-1.5 w-1.5 rounded-full bg-[#7CE5DB]"
+                />
                 <motion.span
                   style={{ y: packetRise2 }}
-                  className="absolute -top-7 -left-6 font-mono text-[9px] font-bold text-[#F6B96D]"
-                >
-                  &#123;&#125;
-                </motion.span>
+                  className="h-1.5 w-1.5 rounded-full bg-[#F6B96D]"
+                />
               </div>
-
               <div className="flex items-center justify-between">
-                <span className="rounded bg-[#E88B2E]/25 px-1.5 py-0.5 font-mono text-[8px] font-bold text-[#FFCF7A]">
-                  AGENT BUS
+                <span className="rounded bg-[#E88B2E]/2 px-1.5 py-0.5 font-mono text-[8px] font-bold text-[#FFCF7A]">
+                  ORCH
                 </span>
-                <span className="font-mono text-[9px] font-bold text-[#7CE5DB]">
-                  JX-01
-                </span>
+                <span className="font-mono text-[9px] font-bold text-[#7CE5DB]">JX-01</span>
               </div>
-              <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+              <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-white/10">
                 <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-[#E88B2E] to-[#7CE5DB]" />
               </div>
-
-              {/* Forward Telemetry Scanner Beam */}
-              <div className="absolute -right-14 top-3 h-7 w-14 bg-gradient-to-r from-[#7CE5DB]/45 to-transparent [clip-path:polygon(0_35%,100%_0,100%_100%,0_65%)]" />
-
-              {/* Physically Rotating Drive Cogs */}
-              <div className="absolute -bottom-2.5 inset-x-3 flex justify-between">
-                {[0, 1, 2].map((w) => (
-                  <motion.span
-                    key={w}
-                    style={{ rotate: gearAngle }}
-                    className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#E88B2E] bg-[#100A18]"
-                  >
-                    <span className="h-3 w-0.5 bg-[#7CE5DB]" />
-                  </motion.span>
-                ))}
-              </div>
+              <div className="absolute -right-10 top-3 h-5 w-10 bg-gradient-to-r from-[#7CE5DB]/35 to-transparent" />
             </div>
           </motion.div>
 
-          {/* Glowing Fiber-Optic Bus Rail */}
-          <div className="relative z-20 mt-2 h-1.5 w-full rounded-full bg-gradient-to-r from-[#5B3D60] via-[#7CE5DB] to-[#E88B2E]" />
-          <div className="mt-1 flex justify-between font-mono text-[10px] uppercase tracking-[0.2em] text-[#FBF5E8]/65">
+          <div className="relative z-20 mt-3 h-1 w-full rounded-full bg-gradient-to-r from-[#1A2E36] via-[#70D6CE] to-[#E88B2E]" />
+          <div className="mt-1.5 flex justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-[#FBF5E8]/6">
             <span>JXLab Agent Pipeline</span>
             <span>Scroll to run · Click any track to inspect</span>
           </div>

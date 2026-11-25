@@ -5,10 +5,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { jxlabConfig, type TeamMember } from "@/data/jxlabConfig";
 
-// Articulated AI Agent Bot with distance-locked stride legs (--gait), bobbing chassis, glowing visor & signal antennae
+// Compact agent-console chassis with gait (studio language, not critter)
 function ArticulatedAgentBot({ highlighted }: { highlighted: boolean }) {
   const accent = highlighted ? "#FFCF7A" : "#7CE5DB";
-  const shell = highlighted ? "#E88B2E" : "#182830";
+  const shell = highlighted ? "#E88B2E" : "#0E1A20";
   const border = highlighted ? "#FBF5E8" : "#70D6CE";
 
   return (
@@ -19,55 +19,50 @@ function ArticulatedAgentBot({ highlighted }: { highlighted: boolean }) {
       aria-hidden="true"
     >
       <g className="ant-body-bob">
-        {/* Articulated Robotic Stride Legs Set A */}
         <path
           className="ant-leg-a"
-          d="M14 19L10 26M26 19L30 26"
+          d="M14 18L11 25M27 18L30 25"
           stroke={accent}
-          strokeWidth="1.8"
+          strokeWidth="1.6"
           strokeLinecap="round"
         />
-        {/* Articulated Robotic Stride Legs Set B */}
         <path
           className="ant-leg-b"
-          d="M18 19L16 26M23 19L25 26"
+          d="M18 18L16 25M23 18L25 25"
           stroke={accent}
-          strokeWidth="1.8"
+          strokeWidth="1.6"
           strokeLinecap="round"
         />
-        {/* Dual Telemetry Signal Antennae */}
         <path
           className="ant-antenna-l"
-          d="M16 7L12 1"
+          d="M15 8L13 2"
           stroke={accent}
-          strokeWidth="1.4"
+          strokeWidth="1.2"
           strokeLinecap="round"
         />
-        <circle cx="12" cy="1.5" r="1.4" fill="#F6B96D" />
         <path
           className="ant-antenna-r"
-          d="M28 7L32 1"
+          d="M29 8L31 2"
           stroke={accent}
-          strokeWidth="1.4"
+          strokeWidth="1.2"
           strokeLinecap="round"
         />
-        <circle cx="32" cy="1.5" r="1.4" fill="#7CE5DB" />
+        <circle cx="13" cy="2" r="1.2" fill="#F6B96D" />
+        <circle cx="31" cy="2" r="1.2" fill="#7CE5DB" />
 
-        {/* Agent Chassis Body */}
         <rect
           x="10"
           y="7"
           width="24"
-          height="13"
-          rx="4"
+          height="12"
+          rx="2.5"
           fill={shell}
           stroke={border}
-          strokeWidth="1.4"
+          strokeWidth="1.3"
         />
-        {/* Glowing Optical Visor & Eyes */}
-        <rect x="14" y="10.5" width="16" height="6" rx="2.5" fill="#0A1419" />
-        <circle cx="18.5" cy="13.5" r="1.6" fill={highlighted ? "#FBF5E8" : "#7CE5DB"} />
-        <circle cx="25.5" cy="13.5" r="1.6" fill="#F6B96D" />
+        <rect x="13" y="10" width="18" height="5" rx="1.5" fill="#071014" />
+        <rect x="15" y="11.5" width="6" height="2" rx="0.5" fill={highlighted ? "#FBF5E8" : "#7CE5DB"} />
+        <rect x="23" y="11.5" width="6" height="2" rx="0.5" fill="#F6B96D" />
       </g>
     </svg>
   );
@@ -582,7 +577,7 @@ export function AntTrailTeam() {
             onMouseLeave={() => setIsPausedState(false)}
             onFocusCapture={() => setIsPausedState(true)}
             onBlurCapture={() => setIsPausedState(false)}
-            className="relative mx-auto h-[250px] w-full overflow-hidden rounded-3xl border border-[#7CE5DB]/22 bg-[#0C141A]/75 shadow-inner"
+            className="relative mx-auto h-[250px] w-full overflow-hidden rounded-2xl border border-[#70D6CE]/25 bg-[#0A1218]/8 shadow-inner"
           >
             {/* Dual-Stroke Glowing Fiber-Optic Bus Track SVG */}
             <svg
