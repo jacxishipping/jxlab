@@ -1,0 +1,398 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --color-cream: #FBF5E8;
+  --color-cream-deep: #F2E7D0;
+  --color-cream-border: #E2D2B7;
+  --color-ink: #1E1712;
+  --color-ink-muted: #5C4B3E;
+  --color-amber: #E88B2E;
+  --color-amber-hover: #D4761B;
+  --color-amber-soft: #F6B96D;
+  --color-tan: #C59560;
+  --color-tan-hover: #B2814B;
+  --color-soil: #1E140D;
+  --color-soil-deep: #140D08;
+}
+
+:root {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  --ant-tag-active: #ffcf7a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+}
+
+html,
+body {
+  background-color: #130911;
+  color: #fbf5e8;
+  overflow-x: hidden;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tactile cream surface for cards & modals */
+.cream-card {
+  background: linear-gradient(180deg, #fdf8ee 0%, #f7edd9 100%);
+  color: #1e1712;
+  border: 1px solid #e2d2b7;
+  box-shadow:
+    0 12px 32px -12px rgba(15, 10, 6, 0.45),
+    0 2px 6px rgba(15, 10, 6, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.cream-pill {
+  background: #fbf5e8;
+  color: #1e1712;
+  border: 1px solid #e2d2b7;
+  box-shadow: 0 4px 12px rgba(10, 7, 4, 0.28);
+}
+
+/* Dotted Underground Soil Grain */
+.soil-grain {
+  background-image:
+    radial-gradient(rgba(197, 149, 96, 0.14) 1px, transparent 1px),
+    radial-gradient(rgba(251, 245, 232, 0.06) 1px, transparent 1px);
+  background-size: 22px 22px, 37px 37px;
+  background-position: 0 0, 11px 17px;
+}
+
+/* CRT Terminal Shader-Inspired Effects */
+.crt-shell {
+  background: linear-gradient(
+    165deg,
+    rgba(9, 36, 41, 0.92) 0%,
+    rgba(6, 22, 27, 0.96) 100%
+  );
+  border: 1px solid rgba(112, 214, 206, 0.3);
+  box-shadow:
+    0 28px 80px -20px rgba(0, 0, 0, 0.8),
+    0 0 54px -10px rgba(56, 178, 172, 0.24),
+    inset 0 0 60px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(168, 240, 234, 0.2);
+}
+
+@keyframes crtScanDrift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 16px;
+  }
+}
+
+@keyframes crtRollBar {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(420%);
+  }
+}
+
+@keyframes crtFlicker {
+  0%,
+  100% {
+    opacity: 0.99;
+  }
+  50% {
+    opacity: 0.962;
+  }
+}
+
+.crt-scanlines {
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.26) 0px,
+      rgba(0, 0, 0, 0.26) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      to right,
+      rgba(255, 80, 80, 0.03) 0px,
+      rgba(80, 255, 160, 0.03) 1px,
+      rgba(80, 160, 255, 0.03) 2px,
+      transparent 3px
+    );
+  animation: crtScanDrift 1.6s linear infinite;
+}
+
+.crt-roll-bar {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(130, 240, 230, 0.055) 50%,
+    transparent 100%
+  );
+  animation: crtRollBar 14s linear infinite;
+}
+
+.crt-phosphor {
+  text-shadow:
+    0 0 10px rgba(124, 229, 219, 0.42),
+    -0.6px 0 0 rgba(255, 95, 95, 0.28),
+    0.6px 0 0 rgba(95, 220, 255, 0.28);
+  animation: crtFlicker 0.785s ease-in-out infinite;
+}
+
+.crt-phosphor-amber {
+  text-shadow:
+    0 0 14px rgba(246, 185, 109, 0.52),
+    -0.8px 0 0 rgba(255, 110, 70, 0.35),
+    0.8px 0 0 rgba(120, 225, 255, 0.25);
+}
+
+/* Continuous 120s Cloud Strip Drift (matches hackthenest.tech) */
+@keyframes cloudDriftStrip {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(100vw, 0, 0);
+  }
+}
+
+.animate-cloud-strip {
+  animation: cloudDriftStrip 120s linear infinite;
+}
+
+/* Twinkling Stars (matches hackthenest.tech star-twinkle) */
+@keyframes starTwinkle {
+  0% {
+    opacity: 0.45;
+  }
+  33% {
+    opacity: 1;
+  }
+  66% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-star-twinkle {
+  animation-name: starTwinkle;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* 420ms Crisp CRT Cursor Blink */
+@keyframes blinkCursor420 {
+  0%,
+  49.9% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-cursor-420 {
+  animation: blinkCursor420 840ms steps(2, start) infinite;
+}
+
+/* Sunset Act 3 Breathing Lamp Halos & Falling Leaves */
+@keyframes lampBreathe {
+  0%,
+  100% {
+    transform: scale(0.92);
+    opacity: 0.72;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+.animate-lamp-breathe {
+  animation: lampBreathe 7s ease-in-out infinite;
+}
+
+@keyframes autumnLeafSkitter {
+  0% {
+    transform: translate3d(-40px, 0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  35% {
+    transform: translate3d(28vw, -16px, 0) rotate(130deg);
+  }
+  65% {
+    transform: translate3d(62vw, 6px, 0) rotate(260deg);
+  }
+  90% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate3d(102vw, -10px, 0) rotate(390deg);
+    opacity: 0;
+  }
+}
+
+.animate-leaf-skitter {
+  animation: autumnLeafSkitter 11s ease-in-out infinite;
+}
+
+/* Constant-Speed Infinite Marquee (duration computed dynamically at 70px/s) */
+@keyframes marqueeScroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation-name: marqueeScroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.marquee-wrapper:hover .marquee-track,
+.marquee-wrapper:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Distance-Locked Ant Tripod Gait & Antennae Wiggle (matches hackthenest.tech) */
+@keyframes antStrideA {
+  0%,
+  100% {
+    transform: rotate(-21deg) scaleY(1);
+  }
+  50% {
+    transform: rotate(21deg) scaleY(0.74);
+  }
+}
+
+@keyframes antStrideB {
+  0%,
+  100% {
+    transform: rotate(21deg) scaleY(0.74);
+  }
+  50% {
+    transform: rotate(-21deg) scaleY(1);
+  }
+}
+
+@keyframes antBob {
+  0%,
+  50%,
+  100% {
+    transform: translateY(0px);
+  }
+  25%,
+  75% {
+    transform: translateY(-0.9px);
+  }
+}
+
+@keyframes antAntennaL {
+  0%,
+  100% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(12deg);
+  }
+}
+
+@keyframes antAntennaR {
+  0%,
+  100% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(-11deg);
+  }
+}
+
+.ant-leg-a {
+  transform-box: fill-box;
+  transform-origin: center top;
+  animation: antStrideA 1s linear infinite paused;
+  animation-delay: calc(var(--gait, 0) * -1s);
+}
+
+.ant-leg-b {
+  transform-box: fill-box;
+  transform-origin: center top;
+  animation: antStrideB 1s linear infinite paused;
+  animation-delay: calc(var(--gait, 0) * -1s);
+}
+
+.ant-body-bob {
+  animation: antBob 1s linear infinite paused;
+  animation-delay: calc(var(--gait, 0) * -1s);
+}
+
+.ant-antenna-l {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: antAntennaL 1.7s ease-in-out infinite alternate;
+}
+
+.ant-antenna-r {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: antAntennaR 2.3s ease-in-out infinite alternate;
+}
+
+[data-awake="false"] .ant-antenna-l,
+[data-awake="false"] .ant-antenna-r {
+  animation-play-state: paused;
+}
+
+/* Reduced Motion Accessibility Overrides */
+@media (prefers-reduced-motion: reduce) {
+  .animate-cloud-strip,
+  .animate-star-twinkle,
+  .animate-cursor-420,
+  .crt-scanlines,
+  .crt-roll-bar,
+  .crt-phosphor,
+  .animate-lamp-breathe,
+  .animate-leaf-skitter,
+  .marquee-track,
+  .ant-antenna-l,
+  .ant-antenna-r {
+    animation: none !important;
+  }
+}
