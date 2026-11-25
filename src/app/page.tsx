@@ -26,20 +26,22 @@ export default function HomePage() {
       <SectionRail />
 
       <main className="relative z-10">
-        {/* Act 1: Brand-first dawn hero + misty studio skyline */}
+        {/* Act 1: Full-viewport dawn hero */}
         <Hero />
 
-        {/* Act 2: Canopy CRT typewriter + interactive CLI */}
+        {/* Act 2: Full-viewport canopy CRT scene */}
         <TerminalAbout />
 
-        {/* Act 3: Agent/CI pipeline with dusk lamps, leaves, cream tracks */}
+        {/* Act 3: Full-viewport pipeline scene + cream tracks below */}
         <DepotSolutions />
 
-        {/* Act 4: Eagle/feather showcase, flagship builds, marquee + FAQ */}
+        {/* Act 4: Full-viewport eagle/builds scene + marquee */}
         <BuildsMarquee />
+
+        {/* Act 5: Full-viewport FAQ scene */}
         <FaqAccordion />
 
-        {/* Act 5: Ant trail crew + underground deploy vault */}
+        {/* Act 6: Full-viewport crew meadow + deploy vault scene */}
         <AntTrailTeam />
         <UndergroundFooter />
       </main>

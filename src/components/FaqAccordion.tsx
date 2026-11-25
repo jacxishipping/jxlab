@@ -18,9 +18,9 @@ export function FaqAccordion() {
   return (
     <section
       id="faq"
-      className="relative scroll-mt-20 overflow-hidden bg-transparent px-4 pb-28 pt-14 sm:px-6 sm:pb-36 sm:pt-20"
+      className="relative flex min-h-[100svh] scroll-mt-20 flex-col justify-center overflow-hidden bg-transparent px-4 py-24 sm:px-6 sm:py-28"
     >
-      <div className="relative z-10 mx-auto max-w-3xl">
+      <div className="relative z-10 mx-auto w-full max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}

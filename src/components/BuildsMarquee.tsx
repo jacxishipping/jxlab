@@ -196,9 +196,11 @@ export function BuildsMarquee() {
   return (
     <section
       id="builds"
-      className="relative scroll-mt-20 overflow-hidden bg-transparent px-4 pb-20 pt-24 sm:px-6 sm:pb-24 sm:pt-32"
+      className="relative scroll-mt-20 overflow-hidden bg-transparent"
     >
-      <div className="relative z-10 mx-auto max-w-6xl">
+      {/* Full-viewport eagle / showcase scene */}
+      <div className="relative z-10 flex min-h-[100svh] flex-col justify-center px-4 py-24 sm:px-6 sm:py-28">
+      <div className="mx-auto w-full max-w-6xl">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
@@ -219,15 +221,22 @@ export function BuildsMarquee() {
           </p>
         </motion.div>
 
-        {/* Eagle flyover + feather-drop settle */}
-        <div ref={stageRef} className="relative mt-14">
+        {/* Eagle plaza — fills the rest of the viewport scene */}
+        <div
+          ref={stageRef}
+          className="relative mt-10 min-h-[42vh] overflow-hidden rounded-2xl border border-[#E2D2B7]/15 bg-[#1A1218]/35 shadow-[0_24px_60px_rgba(20,10,16,0.4)] backdrop-blur-sm sm:mt-12 sm:min-h-[48vh]"
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse 70% 50% at 70% 30%, rgba(251,245,232,0.12) 0%, transparent 55%), radial-gradient(ellipse 60% 45% at 20% 70%, rgba(232,139,46,0.12) 0%, transparent 60%)",
+          }}
+        >
           {triggerFlyover && (
             <motion.div
               aria-hidden="true"
-              initial={{ x: "-24vw", y: "0vh", rotate: 0, opacity: 0.95 }}
+              initial={{ x: "-24vw", y: "18%", rotate: 0, opacity: 0.95 }}
               animate={{
-                x: "124vw",
-                y: ["0vh", "-2vh", "0vh"],
+                x: "110%",
+                y: ["18%", "8%", "22%"],
                 rotate: [0, -2, 0],
                 opacity: [0.95, 1, 0],
               }}
@@ -237,13 +246,20 @@ export function BuildsMarquee() {
                 rotate: { duration: 2, ease: "easeInOut" },
                 opacity: { duration: 2, times: [0, 0.9, 1] },
               }}
-              className="pointer-events-none fixed left-0 top-[22vh] z-40"
+              className="pointer-events-none absolute left-0 top-0 z-20"
             >
               <EagleSilhouette />
             </motion.div>
           )}
+          <div className="absolute inset-x-0 bottom-5 flex justify-center font-mono text-[10px] uppercase tracking-[0.2em] text-[#FBF5E8]/55">
+            Flagship systems · Scroll for builds
+          </div>
+        </div>
+      </div>
+      </div>
 
-          {/* 2x2 Showcase Grid for the 4 Real JXLab Projects */}
+      {/* Cream build cards + feather settle below the full-screen scene */}
+      <div className="relative z-10 mx-auto max-w-6xl px-4 pb-10 sm:px-6">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {buildsSection.builds.map((build, idx) => {
               const isSecondRow = idx >= 2;
@@ -384,10 +400,10 @@ export function BuildsMarquee() {
               );
             })}
           </div>
-        </div>
+      </div>
 
-        {/* Constant 70px/s Tech Stack & Ecosystem Marquee */}
-        <div className="mt-20">
+      {/* Tech marquee below the full-screen builds scene */}
+      <div className="relative z-10 mx-auto max-w-6xl px-4 pb-20 sm:px-6 sm:pb-24">
           <p className="mb-5 text-center font-mono text-xs uppercase tracking-[0.24em] text-[#C8CCE8]/85">
             Production Stack &amp; Ecosystem
           </p>
@@ -419,7 +435,6 @@ export function BuildsMarquee() {
               ))}
             </div>
           </div>
-        </div>
       </div>
     </section>
   );

@@ -214,9 +214,9 @@ export function UndergroundFooter() {
       {/* Closing Subsurface Compute Core CTA Vault */}
       <section
         id="cta"
-        className="relative scroll-mt-20 px-4 pb-20 pt-8 sm:px-6 sm:pb-24"
+        className="relative flex min-h-[100svh] scroll-mt-20 flex-col justify-center px-4 py-24 sm:px-6 sm:py-28"
       >
-        <div className="relative mx-auto flex max-w-6xl items-center justify-center">
+        <div className="relative mx-auto flex w-full max-w-6xl items-center justify-center">
           <FiberConduitBay />
 
           {/* Central Rounded Compute Core Vault CTA */}

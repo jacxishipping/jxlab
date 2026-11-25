@@ -123,7 +123,7 @@ export function DepotSolutions() {
     <section
       id="solutions"
       ref={sectionRef}
-      className="relative scroll-mt-20 overflow-hidden bg-transparent px-4 py-24 sm:px-6 sm:py-32"
+      className="relative scroll-mt-20 overflow-hidden bg-transparent"
     >
       {/* Skittering leaves + data packets across sunset pipeline */}
       <div
@@ -161,7 +161,9 @@ export function DepotSolutions() {
         )}
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl">
+      {/* Full-viewport pipeline scene (HTN-style act) */}
+      <div className="relative z-10 flex min-h-[100svh] flex-col justify-center px-4 py-24 sm:px-6 sm:py-28">
+        <div className="mx-auto w-full max-w-6xl">
         {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
@@ -185,7 +187,7 @@ export function DepotSolutions() {
         {/* Agent pipeline stage — warm lamp halos + dusk glass */}
         <div
           aria-hidden="true"
-          className="relative mt-12 overflow-hidden rounded-2xl border border-[#E2D2B7]/18 bg-[#1A1218]/55 px-4 pb-5 pt-10 shadow-[0_24px_60px_rgba(20,10,16,0.55)] backdrop-blur-md sm:px-8"
+          className="relative mt-10 min-h-[42vh] overflow-hidden rounded-2xl border border-[#E2D2B7]/18 bg-[#1A1218]/55 px-4 pb-5 pt-10 shadow-[0_24px_60px_rgba(20,10,16,0.55)] backdrop-blur-md sm:mt-12 sm:min-h-[48vh] sm:px-8"
           style={{
             backgroundImage:
               "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232,139,46,0.14) 0%, transparent 55%)",
@@ -342,9 +344,13 @@ export function DepotSolutions() {
             <span>Scroll to run · Click any track to inspect</span>
           </div>
         </div>
+        </div>
+      </div>
 
+      {/* Cream track cards — continue below the full-screen pipeline scene */}
+      <div className="relative z-10 mx-auto max-w-6xl px-4 pb-24 sm:px-6 sm:pb-32">
         {/* Grouped Capability Tracks */}
-        <div className="mt-14 space-y-16">
+        <div className="space-y-16">
           {solutionsSection.groups.map((group) => {
             const items = solutionsSection.items.filter(
               (item) => item.group === group.id

@@ -267,19 +267,19 @@ export function TerminalAbout() {
     <section
       id="about"
       ref={sectionRef}
-      className="relative scroll-mt-20 overflow-hidden px-4 pb-28 pt-14 sm:px-6 sm:pb-36 sm:pt-20"
+      className="relative flex min-h-[100svh] scroll-mt-20 flex-col justify-center overflow-hidden px-4 py-24 sm:px-6 sm:py-28"
       style={{
         background:
           "linear-gradient(180deg, #0B1E21 0%, rgba(11, 33, 38, 0.96) 62%, rgba(20, 17, 36, 0.45) 90%, rgba(20, 17, 36, 0) 100%)",
       }}
     >
-      {/* Overhead leafy canopy framing (HTN atmosphere + agent lab) */}
+      {/* Full-scene leafy canopy framing the CRT */}
       <motion.div
         style={{ y: foliageY, opacity: foliageOpacity }}
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 flex justify-between"
       >
-        <svg viewBox="0 0 320 200" className="h-40 w-56 drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)] sm:h-56 sm:w-96" fill="none">
+        <svg viewBox="0 0 320 200" className="h-[28vh] w-[42vw] max-w-md drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)] sm:h-[36vh] sm:w-[38vw]" fill="none">
           <path
             d="M0 0H280C226 36 172 64 118 102C76 132 36 156 0 184V0Z"
             fill="#0A221F"
@@ -294,7 +294,7 @@ export function TerminalAbout() {
         </svg>
         <svg
           viewBox="0 0 320 200"
-          className="h-40 w-56 -scale-x-100 drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)] sm:h-56 sm:w-96"
+          className="h-[28vh] w-[42vw] max-w-md -scale-x-100 drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)] sm:h-[36vh] sm:w-[38vw]"
           fill="none"
         >
           <path
@@ -358,9 +358,9 @@ export function TerminalAbout() {
           </div>
 
           {/* Two-Column CRT Body */}
-          <div className="relative z-20 grid grid-cols-1 gap-8 p-5 sm:p-8 lg:grid-cols-[1.25fr_0.95fr] lg:items-center lg:gap-10 lg:p-10">
+          <div className="relative z-20 grid grid-cols-1 gap-6 p-4 sm:gap-8 sm:p-6 lg:grid-cols-[1.25fr_0.95fr] lg:items-center lg:gap-8 lg:p-8">
             {/* Left Monospace Typewriter + Interactive CLI Column */}
-            <div className="crt-phosphor min-h-[290px] space-y-5 font-mono text-sm leading-relaxed text-[#D9F2EF] sm:min-h-[330px] sm:text-[15px]">
+            <div className="crt-phosphor min-h-0 space-y-4 font-mono text-sm leading-relaxed text-[#D9F2EF] sm:text-[15px]">
               {terminal.prompts.map((item, promptIdx) => {
                 const cmdBlock = blocks.find(
                   (b) => b.kind === "command" && b.promptIdx === promptIdx
@@ -505,7 +505,7 @@ export function TerminalAbout() {
             </div>
 
             {/* Agent core schematic panel */}
-            <div className="relative flex min-h-[250px] flex-col justify-center rounded-xl border border-[#70D6CE]/22 bg-[#071418]/85 px-3 py-5 sm:min-h-[280px] sm:p-6">
+            <div className="relative flex min-h-0 flex-col justify-center rounded-xl border border-[#70D6CE]/22 bg-[#071418]/85 px-3 py-4 sm:p-5">
               <div className="mb-3 flex items-center justify-between font-mono text-[10px] tracking-wider text-[#70D6CE]/75">
                 <span>AGENT CORE // SCHEMATIC</span>
                 <span className="text-[#F6B96D]/80">v1.0</span>

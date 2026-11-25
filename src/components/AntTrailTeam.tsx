@@ -354,7 +354,7 @@ function NeuralSignalCanvas() {
         mouseRef.current.active = false;
       }}
       aria-hidden="true"
-      className="block h-44 w-full touch-pan-y sm:h-52"
+      className="block h-[26vh] min-h-[11rem] w-full touch-pan-y sm:h-[30vh] sm:min-h-[13rem]"
     />
   );
 }
@@ -497,10 +497,10 @@ export function AntTrailTeam() {
   return (
     <section
       id="team"
-      className="relative scroll-mt-20 overflow-hidden bg-gradient-to-b from-[#0D0A16] via-[#0E1320] to-[#111B23]"
+      className="relative flex min-h-[100svh] scroll-mt-20 flex-col justify-center overflow-hidden bg-gradient-to-b from-[#0D0A16] via-[#0E1320] to-[#111B23]"
     >
-      {/* Heading over Interactive Neural Signal Horizon */}
-      <div className="relative pt-14 sm:pt-20">
+      {/* Full-viewport crew scene: signal horizon + agent bus */}
+      <div className="relative flex flex-1 flex-col justify-center pt-20 sm:pt-24">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -527,7 +527,7 @@ export function AntTrailTeam() {
 
       {/* Subsurface Circuit Conduits & Marching Articulated AI Agent Bots */}
       <div
-        className="soil-grain relative px-4 pb-20 pt-8 sm:px-6 sm:pb-24"
+        className="soil-grain relative px-4 pb-16 pt-6 sm:px-6 sm:pb-20"
         style={{
           backgroundColor: "#121D24",
           backgroundImage:
@@ -577,12 +577,12 @@ export function AntTrailTeam() {
             onMouseLeave={() => setIsPausedState(false)}
             onFocusCapture={() => setIsPausedState(true)}
             onBlurCapture={() => setIsPausedState(false)}
-            className="relative mx-auto h-[250px] w-full overflow-hidden rounded-2xl border border-[#70D6CE]/25 bg-[#0A1218]/8 shadow-inner"
+            className="relative mx-auto h-[min(38vh,320px)] min-h-[250px] w-full overflow-hidden rounded-2xl border border-[#70D6CE]/25 bg-[#0A1218]/8 shadow-inner"
           >
             {/* Dual-Stroke Glowing Fiber-Optic Bus Track SVG */}
             <svg
               width={stageWidth}
-              height={250}
+              height={320}
               viewBox={`0 0 ${stageWidth} 250`}
               fill="none"
               aria-hidden="true"
