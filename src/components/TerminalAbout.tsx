@@ -270,80 +270,44 @@ export function TerminalAbout() {
       className="relative scroll-mt-20 overflow-hidden px-4 pb-28 pt-14 sm:px-6 sm:pb-36 sm:pt-20"
       style={{
         background:
-          "linear-gradient(180deg, #0B1E21 0%, rgba(12, 26, 34, 0.96) 55%, rgba(22, 20, 36, 0.4) 88%, rgba(22, 20, 36, 0) 100%)",
+          "linear-gradient(180deg, #0B1E21 0%, rgba(11, 33, 38, 0.96) 62%, rgba(20, 17, 36, 0.45) 90%, rgba(20, 17, 36, 0) 100%)",
       }}
     >
-      {/* Studio blueprint / rack-frame corners */}
+      {/* Overhead leafy canopy framing (HTN atmosphere + agent lab) */}
       <motion.div
         style={{ y: foliageY, opacity: foliageOpacity }}
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 flex justify-between"
       >
-        <svg viewBox="0 0 340 200" className="h-36 w-56 sm:h-48 sm:w-84" fill="none">
+        <svg viewBox="0 0 320 200" className="h-40 w-56 drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)] sm:h-56 sm:w-96" fill="none">
           <path
-            d="M0 20H120V48H176V20H220"
-            stroke="#70D6CE"
-            strokeOpacity="0.35"
-            strokeWidth="1.6"
+            d="M0 0H280C226 36 172 64 118 102C76 132 36 156 0 184V0Z"
+            fill="#0A221F"
           />
-          <path
-            d="M0 52H72V92H128M0 92H48"
-            stroke="#70D6CE"
-            strokeOpacity="0.28"
-            strokeWidth="1.6"
-          />
-          <path d="M24 0V40H64" stroke="#F6B96D" strokeOpacity="0.35" strokeWidth="1.5" />
-          <rect
-            x="148"
-            y="64"
-            width="44"
-            height="36"
-            rx="3"
-            fill="#0B1E24"
-            stroke="#F6B96D"
-            strokeOpacity="0.45"
-            strokeWidth="1.4"
-          />
-          <rect x="156" y="72" width="20" height="2.5" rx="1" fill="#7CE5DB" fillOpacity="0.55" />
-          <rect x="156" y="80" width="28" height="2.5" rx="1" fill="#F6B96D" fillOpacity="0.45" />
-          <rect x="156" y="88" width="14" height="2.5" rx="1" fill="#70D6CE" fillOpacity="0.4" />
-          <circle cx="220" cy="20" r="3" fill="#7CE5DB" fillOpacity="0.7" />
-          <circle cx="128" cy="92" r="3" fill="#F6B96D" fillOpacity="0.65" />
+          <ellipse cx="165" cy="48" rx="42" ry="16" transform="rotate(-18 165 48)" fill="#1F4F3C" />
+          <ellipse cx="118" cy="70" rx="36" ry="14" transform="rotate(-12 118 70)" fill="#2A6350" />
+          <ellipse cx="96" cy="96" rx="34" ry="13" transform="rotate(-24 96 96)" fill="#245A48" />
+          <ellipse cx="48" cy="140" rx="28" ry="12" transform="rotate(-28 48 140)" fill="#1A4036" />
+          <ellipse cx="188" cy="28" rx="22" ry="9" transform="rotate(-8 188 28)" fill="#357A5E" fillOpacity="0.85" />
+          <circle cx="118" cy="72" r="2.5" fill="#F6B96D" fillOpacity="0.7" />
+          <circle cx="72" cy="118" r="2" fill="#7CE5DB" fillOpacity="0.55" />
         </svg>
         <svg
-          viewBox="0 0 340 200"
-          className="h-36 w-56 -scale-x-100 sm:h-48 sm:w-84"
+          viewBox="0 0 320 200"
+          className="h-40 w-56 -scale-x-100 drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)] sm:h-56 sm:w-96"
           fill="none"
         >
           <path
-            d="M0 20H120V48H176V20H220"
-            stroke="#70D6CE"
-            strokeOpacity="0.35"
-            strokeWidth="1.6"
+            d="M0 0H280C226 36 172 64 118 102C76 132 36 156 0 184V0Z"
+            fill="#0A221F"
           />
-          <path
-            d="M0 52H72V92H128M0 92H48"
-            stroke="#70D6CE"
-            strokeOpacity="0.28"
-            strokeWidth="1.6"
-          />
-          <path d="M24 0V40H64" stroke="#F6B96D" strokeOpacity="0.35" strokeWidth="1.5" />
-          <rect
-            x="148"
-            y="64"
-            width="44"
-            height="36"
-            rx="3"
-            fill="#0B1E24"
-            stroke="#F6B96D"
-            strokeOpacity="0.45"
-            strokeWidth="1.4"
-          />
-          <rect x="156" y="72" width="20" height="2.5" rx="1" fill="#7CE5DB" fillOpacity="0.55" />
-          <rect x="156" y="80" width="28" height="2.5" rx="1" fill="#F6B96D" fillOpacity="0.45" />
-          <rect x="156" y="88" width="14" height="2.5" rx="1" fill="#70D6CE" fillOpacity="0.4" />
-          <circle cx="220" cy="20" r="3" fill="#7CE5DB" fillOpacity="0.7" />
-          <circle cx="128" cy="92" r="3" fill="#F6B96D" fillOpacity="0.65" />
+          <ellipse cx="165" cy="48" rx="42" ry="16" transform="rotate(-18 165 48)" fill="#1F4F3C" />
+          <ellipse cx="118" cy="70" rx="36" ry="14" transform="rotate(-12 118 70)" fill="#2A6350" />
+          <ellipse cx="96" cy="96" rx="34" ry="13" transform="rotate(-24 96 96)" fill="#245A48" />
+          <ellipse cx="48" cy="140" rx="28" ry="12" transform="rotate(-28 48 140)" fill="#1A4036" />
+          <ellipse cx="188" cy="28" rx="22" ry="9" transform="rotate(-8 188 28)" fill="#357A5E" fillOpacity="0.85" />
+          <circle cx="118" cy="72" r="2.5" fill="#F6B96D" fillOpacity="0.7" />
+          <circle cx="72" cy="118" r="2" fill="#7CE5DB" fillOpacity="0.55" />
         </svg>
       </motion.div>
 
@@ -358,30 +322,30 @@ export function TerminalAbout() {
           data-testid="crt-tv"
           className="crt-shell relative overflow-hidden rounded-[1.5rem] backdrop-blur-md"
         >
-          {/* Subtle studio scan + sheen */}
+          {/* CRT scanlines, roll bar & curved glass vignette */}
           <div
             aria-hidden="true"
-            className="crt-scanlines pointer-events-none absolute inset-0 z-10"
+            className="crt-scanlines pointer-events-none absolute inset-0 z-10 opacity-75"
           />
           <div
             aria-hidden="true"
-            className="crt-roll-bar pointer-events-none absolute inset-x-0 top-0 z-10 h-24"
+            className="crt-roll-bar pointer-events-none absolute inset-x-0 top-0 z-10 h-28"
           />
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 z-10 rounded-[1.5rem]"
             style={{
               background:
-                "linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 18%), radial-gradient(ellipse at center, transparent 62%, rgba(2,10,12,0.4) 100%)",
+                "radial-gradient(ellipse at 30% 15%, rgba(255,255,255,0.065) 0%, transparent 45%), radial-gradient(ellipse at center, transparent 58%, rgba(2,10,12,0.52) 100%)",
             }}
           />
 
-          {/* Console chrome */}
+          {/* Terminal chrome */}
           <div className="relative z-20 flex flex-wrap items-center justify-between gap-2 border-b border-[#70D6CE]/20 bg-[#06181C]/90 px-4 py-3 sm:px-6">
             <div className="flex items-center gap-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#E06C5A]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#E8A948]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#5BBF99]" />
+              <span className="h-3 w-3 rounded-full bg-[#E06C5A]" />
+              <span className="h-3 w-3 rounded-full bg-[#E8A948]" />
+              <span className="h-3 w-3 rounded-full bg-[#5BBF99]" />
             </div>
             <div className="font-mono text-[11px] tracking-wider text-[#9BE2DC] sm:text-xs">
               <span className="font-semibold text-[#F6B96D]">{terminal.version}</span>

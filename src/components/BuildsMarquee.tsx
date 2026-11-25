@@ -6,54 +6,48 @@ import { motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Github, Lock, Sparkles, TrendingUp } from "lucide-react";
 import { jxlabConfig } from "@/data/jxlabConfig";
 
-// Linear deploy/ship packet flyover (studio language)
-function DeployPacketSilhouette() {
+function EagleSilhouette() {
   return (
     <svg
-      viewBox="0 0 160 48"
+      viewBox="0 0 180 76"
       fill="none"
-      className="h-10 w-28 drop-shadow-[0_8px_18px_rgba(0,0,0,0.45)] sm:h-12 sm:w-36"
+      className="h-14 w-32 drop-shadow-[0_10px_22px_rgba(0,0,0,0.5)] sm:h-20 sm:w-44"
       aria-hidden="true"
     >
       <path
-        d="M8 24H118"
-        stroke="#70D6CE"
-        strokeOpacity="0.55"
-        strokeWidth="2"
-        strokeDasharray="4 5"
+        d="M8 46C34 18 68 8 92 26C110 10 144 6 172 22C146 28 128 40 112 52C104 58 96 62 86 64C78 58 66 56 54 58C40 50 24 46 8 46Z"
+        fill="#19101E"
+        stroke="#F6B96D"
+        strokeOpacity="0.65"
+        strokeWidth="1.6"
       />
-      <rect
-        x="48"
-        y="12"
-        width="64"
-        height="24"
-        rx="4"
-        fill="#0E181E"
-        stroke="#E88B2E"
-        strokeWidth="1.5"
-      />
-      <rect x="56" y="18" width="28" height="3" rx="1" fill="#7CE5DB" fillOpacity="0.7" />
-      <rect x="56" y="25" width="40" height="3" rx="1" fill="#F6B96D" fillOpacity="0.55" />
       <path
-        d="M112 16L132 24L112 32Z"
-        fill="#E88B2E"
-        fillOpacity="0.9"
+        d="M112 32C120 28 128 28 134 32C130 36 122 39 114 38Z"
+        fill="#FBF5E8"
       />
-      <circle cx="20" cy="24" r="3" fill="#7CE5DB" fillOpacity="0.8" />
-      <circle cx="32" cy="24" r="2" fill="#F6B96D" fillOpacity="0.7" />
+      <path d="M132 31L139 33L133 35Z" fill="#E88B2E" />
+      <path
+        d="M52 54L30 66L44 69L64 58Z"
+        fill="#24172C"
+        stroke="#F6B96D"
+        strokeOpacity="0.4"
+        strokeWidth="1"
+      />
     </svg>
   );
 }
 
-// Compact build chip that settles onto showcase cards
-function BuildChipGlyph({ label = "build" }: { label?: string }) {
+function FeatherGlyph() {
   return (
-    <div
-      aria-hidden="true"
-      className="inline-flex items-center justify-center rounded-md border border-[#70D6CE]/55 bg-[#0E181E]/95 px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-[#F6B96D] shadow-[0_0_12px_rgba(112,214,206,0.35)]"
-    >
-      {label}
-    </div>
+    <svg viewBox="0 0 36 18" fill="none" className="h-4.5 w-9" aria-hidden="true">
+      <path
+        d="M2 14C9 3 22 1 34 4C27 11 16 15 2 14Z"
+        fill="#FBF5E8"
+        stroke="#E88B2E"
+        strokeWidth="1.2"
+      />
+      <path d="M4 13C14 9 23 6 32 4.5" stroke="#C66C19" strokeWidth="1" />
+    </svg>
   );
 }
 
@@ -225,7 +219,7 @@ export function BuildsMarquee() {
           </p>
         </motion.div>
 
-        {/* Deploy packet flyover + build-chip settle */}
+        {/* Eagle flyover + feather-drop settle */}
         <div ref={stageRef} className="relative mt-14">
           {triggerFlyover && (
             <motion.div
@@ -245,7 +239,7 @@ export function BuildsMarquee() {
               }}
               className="pointer-events-none fixed left-0 top-[22vh] z-40"
             >
-              <DeployPacketSilhouette />
+              <EagleSilhouette />
             </motion.div>
           )}
 
@@ -286,15 +280,7 @@ export function BuildsMarquee() {
                       }}
                       className="pointer-events-none absolute left-1/2 top-0 z-20 -translate-x-1/2"
                     >
-                      <BuildChipGlyph
-                        label={
-                          build.id === "bidnix"
-                            ? "deploy"
-                            : build.id === "jxui-react"
-                              ? "ui"
-                              : "build"
-                        }
-                      />
+                      <FeatherGlyph />
                     </motion.div>
                   )}
 

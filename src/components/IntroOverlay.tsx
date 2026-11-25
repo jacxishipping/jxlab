@@ -5,6 +5,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { jxlabConfig } from "@/data/jxlabConfig";
 import { JxEmblem } from "./JxEmblem";
 
+const INTRO_STARS = Array.from({ length: 18 }, (_, i) => ({
+  x: ((i * 47.3 + 9) % 92) + 4,
+  y: ((i * 31.1 + 5) % 78) + 6,
+  size: 1 + (i % 3) * 0.6,
+  delay: (i % 6) * 0.12,
+}));
+
 export function IntroOverlay() {
   const [visible, setVisible] = useState(true);
 
@@ -18,7 +25,7 @@ export function IntroOverlay() {
       return;
     }
 
-    const timer = window.setTimeout(() => setVisible(false), 1100);
+    const timer = window.setTimeout(() => setVisible(false), 1600);
     const dismiss = () => setVisible(false);
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" || e.key === "Enter" || e.key === " ") {
@@ -45,27 +52,62 @@ export function IntroOverlay() {
       {visible && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.4, ease: "easeOut" } }}
+          exit={{ opacity: 0, transition: { duration: 0.55, ease: "easeOut" } }}
           onClick={() => setVisible(false)}
-          className="fixed inset-0 z-[70] flex flex-col items-center justify-center bg-gradient-to-b from-[#231533] via-[#3A213F] to-[#1D1318] px-6 text-center"
+          className="fixed inset-0 z-[70] flex flex-col items-center justify-center overflow-hidden px-6 text-center"
+          style={{
+            background:
+              "linear-gradient(180deg, #2a1840 0%, #4a2a4e 38%, #c4785a 72%, #1d1318 100%)",
+          }}
           role="status"
           aria-live="polite"
         >
+          {/* Soft dusk haze */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse 70% 45% at 50% 28%, rgba(255,220,180,0.22) 0%, transparent 65%), radial-gradient(ellipse 50% 40% at 70% 70%, rgba(100,70,140,0.35) 0%, transparent 70%)",
+            }}
+          />
+
+          {/* Tiny intro stars */}
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+            {INTRO_STARS.map((star, idx) => (
+              <span
+                key={idx}
+                className="absolute rounded-full bg-[#FBF5E8]"
+                style={{
+                  left: `${star.x}%`,
+                  top: `${star.y}%`,
+                  width: `${star.size}px`,
+                  height: `${star.size}px`,
+                  opacity: 0.55,
+                  animation: `starTwinkle 2.4s ease-in-out ${star.delay}s infinite alternate`,
+                }}
+              />
+            ))}
+          </div>
+
           <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.35 }}
-            className="flex flex-col items-center gap-4"
+            initial={{ opacity: 0, scale: 0.92, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: "easeOut" }}
+            className="relative z-10 flex flex-col items-center gap-4"
           >
-            <JxEmblem className="h-12 w-12" />
+            <JxEmblem className="h-14 w-14 drop-shadow-[0_8px_24px_rgba(20,10,30,0.45)]" />
             <p className="font-mono text-xs tracking-[0.28em] text-[#F6B96D] sm:text-sm">
               {jxlabConfig.brand.introLabel}
             </p>
-            <div className="h-1 w-40 overflow-hidden rounded-full bg-[#FBF5E8]/15">
+            <p className="max-w-xs font-display text-lg font-semibold tracking-tight text-[#FBF5E8]/90 sm:text-xl">
+              {jxlabConfig.brand.name}
+            </p>
+            <div className="h-1 w-44 overflow-hidden rounded-full bg-[#FBF5E8]/15">
               <motion.div
                 initial={{ x: "-100%" }}
                 animate={{ x: "0%" }}
-                transition={{ duration: 0.95, ease: "easeInOut" }}
+                transition={{ duration: 1.35, ease: "easeInOut" }}
                 className="h-full w-full rounded-full bg-gradient-to-r from-[#E88B2E] to-[#F6B96D]"
               />
             </div>

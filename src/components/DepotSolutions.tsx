@@ -6,11 +6,13 @@ import { ArrowUpRight, Cpu } from "lucide-react";
 import { jxlabConfig, type SolutionItem } from "@/data/jxlabConfig";
 import { SolutionModal, type ModalOrigin } from "./SolutionModal";
 
-// Sparse data-packet dots (studio, not leaf confetti)
-const DATA_PACKETS = [
-  { top: "18%", delay: "0s", duration: "14s", color: "#7CE5DB" },
-  { top: "42%", delay: "4s", duration: "16s", color: "#F6B96D" },
-  { top: "68%", delay: "7.5s", duration: "15s", color: "#70D6CE" },
+// Hybrid atmosphere: soft leaf shapes + glowing data packets across the pipeline dusk
+const SKITTER_BITS = [
+  { top: "16%", delay: "0s", duration: "12s", color: "#E88B2E", kind: "leaf" as const },
+  { top: "28%", delay: "2.4s", duration: "14s", color: "#7CE5DB", kind: "packet" as const },
+  { top: "44%", delay: "5s", duration: "13s", color: "#C45A3A", kind: "leaf" as const },
+  { top: "58%", delay: "7.2s", duration: "15s", color: "#F6B96D", kind: "packet" as const },
+  { top: "72%", delay: "9.5s", duration: "14s", color: "#D4761B", kind: "leaf" as const },
 ];
 
 export function DepotSolutions() {
@@ -123,24 +125,40 @@ export function DepotSolutions() {
       ref={sectionRef}
       className="relative scroll-mt-20 overflow-hidden bg-transparent px-4 py-24 sm:px-6 sm:py-32"
     >
-      {/* Sparse drifting data packets */}
+      {/* Skittering leaves + data packets across sunset pipeline */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 overflow-hidden"
       >
-        {DATA_PACKETS.map((pkt, idx) => (
-          <span
-            key={idx}
-            className="animate-leaf-skitter absolute -left-6 h-1.5 w-1.5 rounded-full opacity-70"
-            style={{
-              top: pkt.top,
-              backgroundColor: pkt.color,
-              boxShadow: `0 0 8px ${pkt.color}`,
-              animationDelay: pkt.delay,
-              animationDuration: pkt.duration,
-            }}
-          />
-        ))}
+        {SKITTER_BITS.map((bit, idx) =>
+          bit.kind === "leaf" ? (
+            <svg
+              key={idx}
+              className="animate-leaf-skitter absolute -left-8 h-3 w-4.5 opacity-80"
+              viewBox="0 0 18 12"
+              style={{
+                top: bit.top,
+                animationDelay: bit.delay,
+                animationDuration: bit.duration,
+              }}
+            >
+              <ellipse cx="9" cy="6" rx="8" ry="4.5" fill={bit.color} fillOpacity="0.85" />
+              <path d="M2 6H16" stroke="#1E1712" strokeOpacity="0.25" strokeWidth="0.6" />
+            </svg>
+          ) : (
+            <span
+              key={idx}
+              className="animate-leaf-skitter absolute -left-6 h-1.5 w-1.5 rounded-full opacity-70"
+              style={{
+                top: bit.top,
+                backgroundColor: bit.color,
+                boxShadow: `0 0 8px ${bit.color}`,
+                animationDelay: bit.delay,
+                animationDuration: bit.duration,
+              }}
+            />
+          )
+        )}
       </div>
 
       <div className="relative z-10 mx-auto max-w-6xl">
@@ -164,24 +182,28 @@ export function DepotSolutions() {
           </p>
         </motion.div>
 
-        {/* Clean CI / agent pipeline diagram */}
+        {/* Agent pipeline stage — warm lamp halos + dusk glass */}
         <div
           aria-hidden="true"
-          className="relative mt-12 overflow-hidden rounded-2xl border border-[#70D6CE]/18 bg-[#0E161C]/72 px-4 pb-5 pt-10 shadow-[0_20px_50px_rgba(6,10,16,0.5)] backdrop-blur-sm sm:px-8"
+          className="relative mt-12 overflow-hidden rounded-2xl border border-[#E2D2B7]/18 bg-[#1A1218]/55 px-4 pb-5 pt-10 shadow-[0_24px_60px_rgba(20,10,16,0.55)] backdrop-blur-md sm:px-8"
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232,139,46,0.14) 0%, transparent 55%)",
+          }}
         >
-          {/* Status beacons */}
+          {/* Breathing streetlamp / status beacons */}
           <div className="pointer-events-none absolute left-8 top-4 flex flex-col items-center">
-            <div className="animate-lamp-breathe h-5 w-5 rounded-full bg-[#7CE5DB]/25 blur-sm" />
-            <div className="-mt-3.5 h-2 w-2 rounded-full bg-[#7CE5DB] shadow-[0_0_10px_#7CE5DB]" />
-            <div className="h-12 w-px bg-[#2A3E48]" />
+            <div className="animate-lamp-breathe h-10 w-10 rounded-full bg-[#F6B96D]/45 blur-md" />
+            <div className="-mt-7 h-2.5 w-2.5 rounded-full bg-[#F6B96D] shadow-[0_0_14px_#F6B96D]" />
+            <div className="h-12 w-px bg-gradient-to-b from-[#F6B96D]/50 to-[#2A3E48]" />
           </div>
           <div className="pointer-events-none absolute right-8 top-4 flex flex-col items-center">
             <div
-              className="animate-lamp-breathe h-5 w-5 rounded-full bg-[#F6B96D]/25 blur-sm"
+              className="animate-lamp-breathe h-10 w-10 rounded-full bg-[#F6B96D]/45 blur-md"
               style={{ animationDelay: "2.4s" }}
             />
-            <div className="-mt-3.5 h-2 w-2 rounded-full bg-[#F6B96D] shadow-[0_0_10px_#F6B96D]" />
-            <div className="h-12 w-px bg-[#2A3E48]" />
+            <div className="-mt-7 h-2.5 w-2.5 rounded-full bg-[#7CE5DB] shadow-[0_0_14px_#7CE5DB]" />
+            <div className="h-12 w-px bg-gradient-to-b from-[#7CE5DB]/45 to-[#2A3E48]" />
           </div>
 
           {/* IDE / rack panes (hero language) */}
